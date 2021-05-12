@@ -2,12 +2,12 @@
 
 Config::Config(std::string fileName){
 	this->_lang = RU; 				// Устанавливаем язык по умолчанию
-	this->openConfigFile(fileName); // Открываем конфигурационный файл
+	this->checkConfigFile(fileName); // Открываем конфигурационный файл
 }
 
 
-// Открытие файла конфигурации
-void Config::openConfigFile(std::string fileName){
+// Проверка файла конфигурации
+void Config::checkConfigFile(std::string fileName){
 	if(this->_file.is_open())
 		this->_file.close();
 

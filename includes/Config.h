@@ -21,7 +21,7 @@ class Config {
 
 	public:
 		Config(std::string fileName);
-		void openConfigFile(std::string fileName);
+		void checkConfigFile(std::string fileName);
 };
 
 
