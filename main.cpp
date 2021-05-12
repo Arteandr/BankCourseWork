@@ -1,6 +1,7 @@
 #include <iostream>
+#include "Config.h"
 
 int main(){
-	std::cout << "Course work" << std::endl;
+	Config conf("../conf/config.txt");
 	return 0;
-}
+};

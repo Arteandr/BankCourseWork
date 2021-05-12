@@ -8,4 +8,4 @@ project(CourseWork VERSION 0.1)
 file(GLOB_RECURSE SRC_FILES src/*.cpp)
 add_executable(main main.cpp ${SRC_FILES})
 
-target_include_directories(main PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/headers)
+target_include_directories(main PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/includes)
