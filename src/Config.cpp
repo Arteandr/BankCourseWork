@@ -1,8 +1,8 @@
 #include "Config.h"
 
 Config::Config(std::string fileName){
-	this->_lang = RU; 				// Устанавливаем язык по умолчанию
-	this->checkConfigFile(fileName); // Открываем конфигурационный файл
+	this->_lang = EN; 			     // Устанавливаем язык по умолчанию
+	this->checkConfigFile(fileName); // Открываем и проверяем конфигурационный файл
 }
 
 
@@ -20,10 +20,13 @@ void Config::checkConfigFile(std::string fileName){
 		int count = 0;
 		while(!this->_file.eof()){
 			getline(this->_file, buffer);
-			++count;
+			if(buffer.length() < 1)
+				continue;
+			else	
+				++count;
 		}
-
-		if(count - 1 != 2)
+		
+		if(count != 2)
 			throw std::exception();
 
 	} catch(const std::exception& e) {
