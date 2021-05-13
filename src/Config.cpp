@@ -8,7 +8,6 @@ Config::Config() {
 	this->_lang = RU; 			     // Устанавливаем язык по умолчанию
 	std::fstream FILE;
 	this->checkConfigFile(FILE, this->_currentPath); // Открываем и проверяем конфигурационный файл
-
 }
 
 
@@ -36,13 +35,11 @@ void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
 					throw std::exception();
 
 				std::string key = buffer.substr(0,pos);
-
 				std::string value = buffer.substr(pos + 1);
 
 				this->_data[key] = value;
 			}
 		}
-		
 		if(count != 2)
 			throw std::exception();
 
@@ -103,6 +100,58 @@ void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
 		return;	
 	}
 };*/
+
+// Получаем текст для отрисовки меню
+std::string Config::getText(std::string fileName, unsigned short n) {
+	if(this->_lang == RU)
+		fileName += "_RU";
+	else if(this->_lang == EN)
+		fileName += "_EN";
+
+
+	try {
+		std::string value = this->_data[fileName];
+		if(value.length() < 1)
+			throw std::exception();
+
+		std::fstream FILE;
+		FILE.open(value, std::ios_base::in | std::ios_base::out);
+		if(!FILE.is_open())
+			throw std::exception();
+
+		std::string buffer;
+		unsigned int cnt = 0;
+		while(!FILE.eof()){
+			getline(FILE, buffer);
+			if(buffer.length() < 1)
+				continue;
+			else {
+				if(cnt + 1 == n)
+					return buffer;
+				cnt++;
+			}
+		}
+
+		if(cnt == 0 || n > cnt)
+			throw std::exception();
+
+	} catch (std::exception& e) {
+
+		if(this->_lang == RU)
+			std::cerr << "Невозможно прочитать файл" << std::endl;
+		else if(this->_lang == EN)
+			std::cerr << "English error" << std::endl;
+	}
+
+	return "";
+};
+
+
+
+
+
+
+
 
 
 

@@ -1,2 +1,2 @@
-START_RU=../locale/menu/start/start-menu-ru.txt
-START_EN=../locale/menu/start/start-menu-en.txt
+START_SCREEN_RU=../locale/menu/start/start-menu-ru.txt
+START_SCREEN_EN=../locale/menu/start/start-menu-en.txt

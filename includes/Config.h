@@ -20,11 +20,13 @@ class Config {
 		Languages _lang;  // Установленный язык
 		std::string _currentPath;
 		std::map<std::string, std::string> _data;
+	private:
+		void checkConfigFile(std::fstream& FILE, std::string fileName); // Проверка конф. файла
 	public:
-		Config();
-		~Config();
+		Config(); 														// Конструктор
+		~Config();                                                      // Деструктор
 	public:
-		void checkConfigFile(std::fstream& FILE, std::string fileName);
+		std::string getText(std::string fileName, unsigned short n);    // Получение текста из файла указаного в конф.
 };
 
 
