@@ -17,9 +17,9 @@ enum Languages {
 
 class Config {
 	private:
-		Languages _lang;  // Установленный язык
-		std::string _currentPath;
-		std::map<std::string, std::string> _data;
+		Languages _lang;  												// Установленный язык
+		std::string _currentPath;                                       // Текущий путь конфигурационного файла
+		std::map<std::string, std::string> _data;                       // Значения с конфигурационного файла
 	private:
 		void checkConfigFile(std::fstream& FILE, std::string fileName); // Проверка конф. файла
 	public:

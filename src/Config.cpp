@@ -1,4 +1,5 @@
 #include "Config.h"
+#include "FileException.h"
 
 // TODO: Custom exception class...
 
@@ -10,7 +11,6 @@ Config::Config() {
 	this->checkConfigFile(FILE, this->_currentPath); // Открываем и проверяем конфигурационный файл
 }
 
-
 // Проверка файла конфигурации
 void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
 	if(FILE.is_open())
@@ -19,7 +19,7 @@ void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
 	try {
 		FILE.open(fileName, std::ios_base::in | std::ios_base::out);
 		if(!FILE.is_open())
-			throw std::exception(); // Если файл не открылся выдаем исключение.
+			throw FileOpenError();
 
 		std::string buffer;
 		int count = 0;
@@ -28,78 +28,60 @@ void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
 			if(buffer.length() < 1)
 				continue;
 			else {
-				++count;
-
 				std::size_t pos = buffer.find("=");
 				if(pos == std::string::npos)
-					throw std::exception();
+					throw FileRowReadError();
 
 				std::string key = buffer.substr(0,pos);
 				std::string value = buffer.substr(pos + 1);
 
 				this->_data[key] = value;
+
+				++count;
 			}
 		}
 		if(count != 2)
-			throw std::exception();
+			throw FileRowCountError();
 
 
-	} catch(const std::exception& e) {
-		this->_data.clear();
-		FILE.close();
-		if(this->_lang == RU)
-			std::cerr << "Невозможно открыть файл конфигурации" << std::endl;
-		else if(this->_lang == EN)
-			std::cerr << "Configuration file not available" << std::endl;
-
+	} catch(FileOpenError& e) {
+		switch (this->_lang) {
+			case RU:
+				std::cerr << "Ошибка при открытии файла: ";
+				break;
+			case EN:
+				std::cerr << "Error during opening the file: ";
+				break;
+		}
+		std::cout << fileName << std::endl;
+		return;
+	} catch(FileRowReadError& e){
+		switch (this->_lang) {
+			case RU:
+				std::cerr << "Ошибка при чтении строки из файла: ";
+				break;
+			case EN:
+				std::cerr << "";
+				break;
+		}
+		std::cout << fileName << std::endl;
+		return;
+	} catch(FileRowCountError& e) {
+		switch (this->_lang) {
+			case RU:
+				std::cerr << "Неверное количество строк в файле: ";
+				break;
+			case EN:
+				std::cerr << "Wrong number of lines in file: ";
+				break;
+		}
+		std::cout << fileName << std::endl;
 		return;
 	}
 
 	FILE.seekg(0, std::ios_base::beg);
 	FILE.close();
 }
-
-/*void Config::openFile(std::fstream& FILE, std::string fileName){
-	std::string buffer;
-	
-	if(this->_lang == RU)
-		fileName += "-ru";
-	else if(this->_lang == EN)
-		fileName += "-en";
-	try {
-		while (!FILE.eof()) {
-			getline(FILE, buffer);
-			std::string::size_type count = buffer.find(fileName);
-			std::cout << count << " " << std::string::npos;	
-			if(count == std::string::npos)
-				continue;
-			else{
-				buffer = buffer.substr(count + fileName.size());
-				count = buffer.find("=");
-				if(count == std::string::npos)
-					throw std::exception();
-
-				buffer = buffer.substr(count + 1);
-				
-				FILE.seekg(0, std::ios_base::beg);
-				break;
-			}
-		}
-		if(FILE.eof())
-			throw std::exception();
-
-		FILE.close();
-	}
-	catch(const std::exception& e){
-		FILE.close();
-
-		if(this->_lang == RU)
-			std::cerr << "Файл " << fileName << " не открыт." << std::endl;
-		else if (this->_lang == EN)
-			std::cerr << "File " << fileName << " was not open." << std::endl;
-		return;	
-	}
-};*/
 
 // Получаем текст для отрисовки меню
 std::string Config::getText(std::string fileName, unsigned short n) {
@@ -112,12 +94,12 @@ std::string Config::getText(std::string fileName, unsigned short n) {
 	try {
 		std::string value = this->_data[fileName];
 		if(value.length() < 1)
-			throw std::exception();
+			throw FileRowReadError();
 
 		std::fstream FILE;
 		FILE.open(value, std::ios_base::in | std::ios_base::out);
 		if(!FILE.is_open())
-			throw std::exception();
+			throw FileOpenError();
 
 		std::string buffer;
 		unsigned int cnt = 0;
@@ -133,16 +115,39 @@ std::string Config::getText(std::string fileName, unsigned short n) {
 		}
 
 		if(cnt == 0 || n > cnt)
-			throw std::exception();
+			throw FileRowCountError();
 
-	} catch (std::exception& e) {
-
-		if(this->_lang == RU)
-			std::cerr << "Невозможно прочитать файл" << std::endl;
-		else if(this->_lang == EN)
-			std::cerr << "English error" << std::endl;
+	}  catch(FileOpenError& e) {
+		switch (this->_lang) {
+			case RU:
+				std::cerr << "Ошибка при открытии файла: ";
+				break;
+			case EN:
+				std::cerr << "Error during opening the file: ";
+				break;
+		}
+		std::cout << fileName << std::endl;
+	} catch(FileRowReadError& e){
+		switch (this->_lang) {
+			case RU:
+				std::cerr << "Ошибка при чтении строки из файла: ";
+				break;
+			case EN:
+				std::cerr << "";
+				break;
+		}
+		std::cout << fileName << std::endl;
+	} catch(FileRowCountError& e) {
+		switch (this->_lang) {
+			case RU:
+				std::cerr << "Неверное количество строк в файле: ";
+				break;
+			case EN:
+				std::cerr << "Wrong number of lines in file: ";
+				break;
+		}
+		std::cout << fileName << std::endl;
 	}
-
 	return "";
 };
 
