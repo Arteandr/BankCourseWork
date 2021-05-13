@@ -9,14 +9,8 @@ Config::Config() {
 	std::fstream FILE;
 	this->checkConfigFile(FILE, this->_currentPath); // Открываем и проверяем конфигурационный файл
 
-	this->printMap();
 }
 
-void Config::printMap() {
-	for (const auto& [key,value] : this->_data) {
-		std::cout << key << ":" << value << std::endl;
-	}
-}
 
 // Проверка файла конфигурации
 void Config::checkConfigFile(std::fstream& FILE, std::string fileName){

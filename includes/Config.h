@@ -24,10 +24,7 @@ class Config {
 		Config();
 		~Config();
 	public:
-		void getFileText(std::fstream& FILE, unsigned short row);
 		void checkConfigFile(std::fstream& FILE, std::string fileName);
-	
-		void printMap();
 };
 
 
