@@ -2,6 +2,6 @@
 #include "Config.h"
 
 int main(){
-	Config* conf = new Config("../conf/config.txt");
+	Config* conf = new Config(); // Создаем объект конфигурации
 	return 0;
 };

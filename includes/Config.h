@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <string>
 #include <ios>
+#include <map>
 
 // Доступные языки в программе
 enum Languages {
@@ -16,12 +17,17 @@ enum Languages {
 
 class Config {
 	private:
-		std::fstream _file; // Файл конфигурации	
 		Languages _lang;  // Установленный язык
-
+		std::string _currentPath;
+		std::map<std::string, std::string> _data;
 	public:
-		Config(std::string fileName);
-		void checkConfigFile(std::string fileName);
+		Config();
+		~Config();
+	public:
+		void getFileText(std::fstream& FILE, unsigned short row);
+		void checkConfigFile(std::fstream& FILE, std::string fileName);
+	
+		void printMap();
 };
 
 

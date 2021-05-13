@@ -1,2 +1,2 @@
-START_RU = locale/menu/start/start-ru.txt
-START_EN = locale/menu/start/start-en.txt
+START_RU=locale/menu/start/start-menu-ru.txt
+START_EN=locale/menu/start/start-menu-en.txt

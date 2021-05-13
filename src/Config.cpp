@@ -1,36 +1,61 @@
 #include "Config.h"
 
-Config::Config(std::string fileName){
-	this->_lang = EN; 			     // Устанавливаем язык по умолчанию
-	this->checkConfigFile(fileName); // Открываем и проверяем конфигурационный файл
+// TODO: Custom exception class...
+
+// Конструктор принимающий путь к файлу конфигурации.
+Config::Config() {
+	this->_currentPath = "../conf/config.txt" ;
+	this->_lang = RU; 			     // Устанавливаем язык по умолчанию
+	std::fstream FILE;
+	this->checkConfigFile(FILE, this->_currentPath); // Открываем и проверяем конфигурационный файл
+
+	this->printMap();
 }
 
+void Config::printMap() {
+	for (const auto& [key,value] : this->_data) {
+		std::cout << key << ":" << value << std::endl;
+	}
+}
 
 // Проверка файла конфигурации
-void Config::checkConfigFile(std::string fileName){
-	if(this->_file.is_open())
-		this->_file.close();
+void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
+	if(FILE.is_open())
+		FILE.close();
 
 	try {
-		this->_file.open(fileName, std::ios_base::in | std::ios_base::out);
-		if(!this->_file.is_open())
+		FILE.open(fileName, std::ios_base::in | std::ios_base::out);
+		if(!FILE.is_open())
 			throw std::exception(); // Если файл не открылся выдаем исключение.
 
 		std::string buffer;
 		int count = 0;
-		while(!this->_file.eof()){
-			getline(this->_file, buffer);
+		while(!FILE.eof()){
+			getline(FILE, buffer);
 			if(buffer.length() < 1)
 				continue;
-			else	
+			else {
 				++count;
+
+				std::size_t pos = buffer.find("=");
+				if(pos == std::string::npos)
+					throw std::exception();
+
+				std::string key = buffer.substr(0,pos);
+
+				std::string value = buffer.substr(pos + 1);
+
+				this->_data[key] = value;
+			}
 		}
 		
 		if(count != 2)
 			throw std::exception();
 
+
 	} catch(const std::exception& e) {
-		this->_file.close();
+		this->_data.clear();
+		FILE.close();
 		if(this->_lang == RU)
 			std::cerr << "Невозможно открыть файл конфигурации" << std::endl;
 		else if(this->_lang == EN)
@@ -39,42 +64,43 @@ void Config::checkConfigFile(std::string fileName){
 		return;
 	}
 
-	this->_file.seekg(0, std::ios_base::beg);
+	FILE.seekg(0, std::ios_base::beg);
+	FILE.close();
 }
 
-
-/*void Config::openFile(std::fstream &this->_file, std::string fileName){
+/*void Config::openFile(std::fstream& FILE, std::string fileName){
 	std::string buffer;
-
+	
 	if(this->_lang == RU)
 		fileName += "-ru";
 	else if(this->_lang == EN)
 		fileName += "-en";
-	
 	try {
-		while (!this->_file.eof()) {
-			getline(this->_file, buffer);
+		while (!FILE.eof()) {
+			getline(FILE, buffer);
 			std::string::size_type count = buffer.find(fileName);
+			std::cout << count << " " << std::string::npos;	
 			if(count == std::string::npos)
 				continue;
 			else{
 				buffer = buffer.substr(count + fileName.size());
 				count = buffer.find("=");
 				if(count == std::string::npos)
-					throw;
+					throw std::exception();
 
 				buffer = buffer.substr(count + 1);
-				this->_file.seekg(0, std::ios_base::beg);
+				
+				FILE.seekg(0, std::ios_base::beg);
 				break;
 			}
 		}
-		if(this->_file.eof())
-			throw;
+		if(FILE.eof())
+			throw std::exception();
 
-		this->_file.close();
+		FILE.close();
 	}
 	catch(const std::exception& e){
-		this->_file.close();
+		FILE.close();
 
 		if(this->_lang == RU)
 			std::cerr << "Файл " << fileName << " не открыт." << std::endl;
@@ -83,3 +109,12 @@ void Config::checkConfigFile(std::string fileName){
 		return;	
 	}
 };*/
+
+
+
+
+
+
+
+
+
