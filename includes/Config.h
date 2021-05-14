@@ -8,6 +8,7 @@
 #include <string>
 #include <ios>
 #include <map>
+#include <vector>
 
 // Доступные языки в программе
 enum Languages {
@@ -23,10 +24,7 @@ class Config {
 	private:
 		void checkConfigFile(std::fstream& FILE, std::string fileName); // Проверка конф. файла
 	public:
-		Config(); 														// Конструктор
-		~Config();                                                      // Деструктор
+		Config();
 	public:
-		std::string getText(std::string fileName, unsigned short n);    // Получение текста из файла указаного в конф.
+		std::vector<std::string> getText(std::string fileName);    // Получение текста из файла указаного в конф.
 };
-
-

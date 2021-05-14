@@ -84,7 +84,9 @@ void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
 }
 
 // Получаем текст для отрисовки меню
-std::string Config::getText(std::string fileName, unsigned short n) {
+std::vector<std::string> Config::getText(std::string fileName) {
+	std::vector<std::string> s;
+
 	if(this->_lang == RU)
 		fileName += "_RU";
 	else if(this->_lang == EN)
@@ -108,14 +110,15 @@ std::string Config::getText(std::string fileName, unsigned short n) {
 			if(buffer.length() < 1)
 				continue;
 			else {
-				if(cnt + 1 == n)
-					return buffer;
+				s.push_back(buffer);;
 				cnt++;
 			}
 		}
 
-		if(cnt == 0 || n > cnt)
+		if(cnt == 0)
 			throw FileRowCountError();
+
+		return s;
 
 	}  catch(FileOpenError& e) {
 		switch (this->_lang) {
@@ -148,7 +151,7 @@ std::string Config::getText(std::string fileName, unsigned short n) {
 		}
 		std::cout << fileName << std::endl;
 	}
-	return "";
+	return s;
 };
 
 
