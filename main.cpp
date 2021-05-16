@@ -4,9 +4,9 @@
 #include "Menu.h"
 
 int main(){
-	Config conf = Config(); // Создаем объект конфигурации
+	Config conf(Menu::chooseLang()); // Создаем объект конфигурации
 	Menu menu(conf);
-
+	
 	menu.startScreen();
 
 	return 0;

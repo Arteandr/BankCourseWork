@@ -1,2 +1,5 @@
 START_SCREEN_RU=../locale/menu/start/start-menu-ru.txt
 START_SCREEN_EN=../locale/menu/start/start-menu-en.txt
+
+MAIN_SCREEN_RU=../locale/menu/main/main-menu-ru.txt
+MAIN_SCREEN_EN=../locale/menu/main/main-menu-en.txt

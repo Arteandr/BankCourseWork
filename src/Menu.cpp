@@ -3,7 +3,19 @@
 std::ostream& center(int v, std::string x) {
 	std::cout << std::setw(v + x.length() / 2);
 	return std::cout;
-}
+};
+
+int getch(void) {
+	struct termios oldattr, newattr;
+	int ch;
+	tcgetattr( STDIN_FILENO, &oldattr );
+	newattr = oldattr;
+	newattr.c_lflag &= ~( ICANON | ECHO );
+	tcsetattr( STDIN_FILENO, TCSANOW, &newattr );
+	ch = getchar();
+	tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
+	return ch;
+};
 
 Menu::Menu(Config& cfg) : _cfg(cfg) { };
 
@@ -14,9 +26,37 @@ void Menu::clear() {
 
 
 /*-------------Начальный экран-------------*/
+Languages Menu::chooseLang() {
+	Menu::clear();
+
+	std::cout << "Выберите язык работы программы | Select the language of the program" << std::endl;
+	std::cout << "1. Русский | Russian" << std::endl;
+	std::cout << "2. Английский | English" << std::endl;
+	bool err;
+	int key;
+
+	do { 
+		err = false;
+		key = getch();
+		if(key == 49 || key == 50) {
+			switch (key) {
+				case 49:
+					return RU;
+					break;
+				case 50:
+					return EN;
+					break;
+			}
+		} else err = true;
+	
+	} while(err);
+
+
+	return RU;
+};
 
 void Menu::startScreen() {
-	this->clear();
+	Menu::clear();
 
 	std::vector<std::string> info = this->_cfg.getText("START_SCREEN");
 
@@ -43,6 +83,10 @@ void Menu::startScreen() {
 		std::cout << std::endl;
 	}
 
+	getch();
+};
 
-
+/*-------------Главный экран-------------*/
+void Menu::mainScreen() {
+	
 }

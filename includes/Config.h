@@ -24,7 +24,7 @@ class Config {
 	private:
 		void checkConfigFile(std::fstream& FILE, std::string fileName); // Проверка конф. файла
 	public:
-		Config();
+		Config(Languages lang);
 	public:
 		std::vector<std::string> getText(std::string fileName);    // Получение текста из файла указаного в конф.
 };

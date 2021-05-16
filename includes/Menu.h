@@ -5,14 +5,20 @@
 #include <string>
 #include <iomanip>
 #include <vector>
+#include <termios.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <cstdio>
 
 class Menu {
 	private:
 		Config& _cfg;
 	private:
-		void clear();
+		static void clear();
 	public:
 		Menu(Config& cfg);
 	public:
+		static Languages chooseLang();
 		void startScreen();
+		void mainScreen();
 };

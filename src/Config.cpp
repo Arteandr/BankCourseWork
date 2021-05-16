@@ -4,9 +4,9 @@
 // TODO: Custom exception class...
 
 // Конструктор принимающий путь к файлу конфигурации.
-Config::Config() {
+Config::Config(Languages lang) {
 	this->_currentPath = "../conf/config.txt" ;
-	this->_lang = RU; 			     // Устанавливаем язык по умолчанию
+	this->_lang = lang; 			     // Устанавливаем язык по умолчанию
 	std::fstream FILE;
 	this->checkConfigFile(FILE, this->_currentPath); // Открываем и проверяем конфигурационный файл
 }
