@@ -9,9 +9,8 @@ Config::Config() {
 };
 
 // Проверка файла конфигурации
-void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
-	if(FILE.is_open())
-		FILE.close();
+void Config::checkConfigFile(std::string fileName){
+	std::fstream FILE;
 
 	try {
 		FILE.open(fileName, std::ios_base::in | std::ios_base::out);
@@ -22,7 +21,7 @@ void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
 		int count = 0;
 		while(!FILE.eof()){
 			getline(FILE, buffer);
-			if(buffer.length() < 1)
+			if(buffer.length() < 1 || buffer[0] == '#')
 				continue;
 			else {
 				std::size_t pos = buffer.find("=");
@@ -104,7 +103,7 @@ std::vector<std::string> Config::getText(std::string fileName) {
 		unsigned int cnt = 0;
 		while(!FILE.eof()){
 			getline(FILE, buffer);
-			if(buffer.length() < 1)
+			if(buffer.length() < 1 || buffer[0] == '#')
 				continue;
 			else {
 				s.push_back(buffer);;

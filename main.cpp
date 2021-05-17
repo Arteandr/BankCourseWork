@@ -8,8 +8,7 @@ int main(){
 	Menu menu = Menu(conf); // Создаем объект меню
 	
 	conf.setCurrentPath("../conf/config.txt"); // Устанавливаем дефолтный путь к конфигурационному файлу
-	std::fstream FILE;
-	conf.checkConfigFile(FILE, conf.getCurrentPath()); // Открываем и проверяем конфигурационный файл
+	conf.checkConfigFile(conf.getCurrentPath()); // Открываем и проверяем конфигурационный файл
 
 	menu.startScreen();
 

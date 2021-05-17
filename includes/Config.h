@@ -16,20 +16,24 @@ enum Languages {
 	EN
 };
 
+// Класс для работы с файлами
 class Config {
+	// Статические поля
 	public:
-		static unsigned short count;
+		static unsigned short count;                                    // Количество экземпляров класса
+
+	// Приватные поля
 	private:
 		Languages _lang;  												// Установленный язык
 		std::string _currentPath;                                       // Текущий путь конфигурационного файла
 		std::map<std::string, std::string> _data;                       // Значения с конфигурационного файла
+
+	// Публичные методы
 	public:
-		void checkConfigFile(std::fstream& FILE, std::string fileName); // Проверка конф. файла
-	public:
-		Config();
-	public:
+		Config();                                                       // Конструктор
+		void checkConfigFile(std::string fileName); // Проверка конф. файла
 		std::vector<std::string> getText(std::string fileName);         // Получение текста из файла указаного в конф.
 		void setLanguage(Languages lang); 								// Установка языка программы
-		void setCurrentPath(std::string path);
-		std::string getCurrentPath();
+		void setCurrentPath(std::string path);                          // Установка текущего пути к конфигурационному файлу
+		std::string getCurrentPath();                                   // Получение текущего пути конфигурацинного файла
 };
