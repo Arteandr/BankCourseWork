@@ -17,7 +17,9 @@ int getch(void) {
 	return ch;
 };
 
-Menu::Menu(Config& cfg) : _cfg(cfg) { };
+Menu::Menu(Config& cfg) : _cfg(cfg) {
+	this->chooseLang(); // Вызываем меню выбора языка
+};
 
 // Очистка консоли
 void Menu::clear() {
@@ -26,12 +28,12 @@ void Menu::clear() {
 
 
 /*-------------Начальный экран-------------*/
-Languages Menu::chooseLang() {
+void Menu::chooseLang() {
 	Menu::clear();
 
-	std::cout << "Выберите язык работы программы | Select the language of the program" << std::endl;
-	std::cout << "1. Русский | Russian" << std::endl;
-	std::cout << "2. Английский | English" << std::endl;
+	std::cout << "Выберите язык работы программы\t" << "|" << "\tSelect the language of the program" << std::endl << std::endl;
+	std::cout << "1. Русский\t\t\t" << "|" << "\tRussian" << std::endl;
+	std::cout << "2. Английский\t\t\t" << "|" << "\tEnglish" << std::endl;
 	bool err;
 	int key;
 
@@ -41,18 +43,15 @@ Languages Menu::chooseLang() {
 		if(key == 49 || key == 50) {
 			switch (key) {
 				case 49:
-					return RU;
+					this->_cfg.setLanguage(RU);
 					break;
 				case 50:
-					return EN;
+					this->_cfg.setLanguage(EN);
 					break;
 			}
 		} else err = true;
 	
 	} while(err);
-
-
-	return RU;
 };
 
 void Menu::startScreen() {
@@ -88,5 +87,7 @@ void Menu::startScreen() {
 
 /*-------------Главный экран-------------*/
 void Menu::mainScreen() {
-	
+	Menu::clear();
+
+	std::vector<std::string> info = this->_cfg.getText("MAIN_SCREEN");
 }

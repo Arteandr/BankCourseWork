@@ -18,7 +18,7 @@ class Menu {
 	public:
 		Menu(Config& cfg);
 	public:
-		static Languages chooseLang();
+		void chooseLang();
 		void startScreen();
 		void mainScreen();
 };

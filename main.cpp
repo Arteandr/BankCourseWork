@@ -4,9 +4,13 @@
 #include "Menu.h"
 
 int main(){
-	Config conf(Menu::chooseLang()); // Создаем объект конфигурации
-	Menu menu(conf);
+	Config conf = Config(); // Создаем объект конфигурации
+	Menu menu = Menu(conf); // Создаем объект меню
 	
+	conf.setCurrentPath("../conf/config.txt"); // Устанавливаем дефолтный путь к конфигурационному файлу
+	std::fstream FILE;
+	conf.checkConfigFile(FILE, conf.getCurrentPath()); // Открываем и проверяем конфигурационный файл
+
 	menu.startScreen();
 
 	return 0;

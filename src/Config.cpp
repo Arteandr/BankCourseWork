@@ -1,15 +1,12 @@
 #include "Config.h"
 #include "FileException.h"
 
-// TODO: Custom exception class...
-
-// Конструктор принимающий путь к файлу конфигурации.
-Config::Config(Languages lang) {
-	this->_currentPath = "../conf/config.txt" ;
-	this->_lang = lang; 			     // Устанавливаем язык по умолчанию
-	std::fstream FILE;
-	this->checkConfigFile(FILE, this->_currentPath); // Открываем и проверяем конфигурационный файл
-}
+// Количество объектов класса
+unsigned short Config::count = 0;
+// Конструктор класса Config
+Config::Config() {
+	++count;
+};
 
 // Проверка файла конфигурации
 void Config::checkConfigFile(std::fstream& FILE, std::string fileName){
@@ -155,17 +152,14 @@ std::vector<std::string> Config::getText(std::string fileName) {
 };
 
 
+void Config::setLanguage(Languages lang) {
+	this->_lang = lang;
+};
 
+void Config::setCurrentPath(std::string path) {
+	this->_currentPath = path; 
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
+std::string Config::getCurrentPath() {
+	return this->_currentPath;
+}
