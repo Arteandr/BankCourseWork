@@ -31,9 +31,10 @@ void Menu::clear() {
 void Menu::chooseLang() {
 	Menu::clear();
 
-	std::cout << "Выберите язык работы программы\t" << "|" << "\tSelect the language of the program" << std::endl << std::endl;
-	std::cout << "1. Русский\t\t\t" << "|" << "\tRussian" << std::endl;
-	std::cout << "2. Английский\t\t\t" << "|" << "\tEnglish" << std::endl;
+	std::cout << "Выберите язык работы программы\t" << "\t|" << "\tSelect the language of the program" << std::endl;
+	std::cout << "\t\t\t\t" << "\t|" << std::endl;
+	std::cout << "1. Русский\t\t\t" << "\t|" << "\t1. Russian" << std::endl;
+	std::cout << "2. Английский\t\t\t" << "\t|" << "\t2. English" << std::endl;
 	bool err;
 	int key;
 
@@ -83,6 +84,8 @@ void Menu::startScreen() {
 	}
 
 	getch();
+
+	this->mainScreen();
 };
 
 /*-------------Главный экран-------------*/
@@ -90,4 +93,18 @@ void Menu::mainScreen() {
 	Menu::clear();
 
 	std::vector<std::string> info = this->_cfg.getText("MAIN_SCREEN");
+
+	for(int i = 0; i < info.size() - 1; i++) {
+		std::cout << i + 1 << ". " << info[i] << std::endl;
+	}
+
+	std::cout << info.size() << ". " << info[info.size() - 1] << std::endl;
+
+	int key = getch();
+
+	switch (key) {
+		
+		case 52:
+			std::exit(0);
+	}
 }

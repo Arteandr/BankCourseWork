@@ -1,0 +1,5 @@
+Open ATM
+Change language
+About
+Exit
+
