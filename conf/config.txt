@@ -1,3 +1,5 @@
+# Language
+LANG=EN
 # Utility
 HELP_RU=../locale/help/help-ru.txt
 HELP_EN=../locale/help/help-en.txt

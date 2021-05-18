@@ -31,7 +31,7 @@ class Config {
 	// Публичные методы
 	public:
 		Config();                                                       // Конструктор
-		void checkConfigFile(std::string fileName); // Проверка конф. файла
+		void checkConfigFile(); // Проверка конф. файла
 		std::vector<std::string> getText(std::string fileName);         // Получение текста из файла указаного в конф.
 		void setLanguage(Languages lang); 								// Установка языка программы
 		void setCurrentPath(std::string path);                          // Установка текущего пути к конфигурационному файлу

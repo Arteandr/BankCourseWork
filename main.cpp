@@ -8,7 +8,7 @@ int main(){
 	Menu menu = Menu(conf); // Создаем объект меню
 	
 	conf.setCurrentPath("../conf/config.txt"); // Устанавливаем дефолтный путь к конфигурационному файлу
-	conf.checkConfigFile(conf.getCurrentPath()); // Открываем и проверяем конфигурационный файл
+	conf.checkConfigFile(); // Открываем и проверяем конфигурационный файл
 
 	menu.startScreen();
 

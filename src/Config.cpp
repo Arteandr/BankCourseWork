@@ -8,12 +8,11 @@ Config::Config() {
 	++count;
 };
 
-// Проверка файла конфигурации
-void Config::checkConfigFile(std::string fileName){
+// Чтение файла конфигурации
+void Config::checkConfigFile(){
 	std::fstream FILE;
-
 	try {
-		FILE.open(fileName, std::ios_base::in | std::ios_base::out);
+		FILE.open(this->_currentPath, std::ios_base::in | std::ios_base::out);
 		if(!FILE.is_open())
 			throw FileOpenError();
 
@@ -36,9 +35,13 @@ void Config::checkConfigFile(std::string fileName){
 				++count;
 			}
 		}
-		if(count != 2)
-			throw FileRowCountError();
 
+		if(this->_data["LANG"] == "RU")
+			this->_lang = RU;
+		else if(this->_data["LANG"] == "EN")
+			this->_lang = EN;
+		else
+			this->_lang = RU;
 
 	} catch(FileOpenError& e) {
 		switch (this->_lang) {
@@ -49,7 +52,7 @@ void Config::checkConfigFile(std::string fileName){
 				std::cerr << "Error during opening the file: ";
 				break;
 		}
-		std::cout << fileName << std::endl;
+		std::cout << this->_currentPath << std::endl;
 		return;
 	} catch(FileRowReadError& e){
 		switch (this->_lang) {
@@ -60,7 +63,7 @@ void Config::checkConfigFile(std::string fileName){
 				std::cerr << "";
 				break;
 		}
-		std::cout << fileName << std::endl;
+		std::cout << this->_currentPath << std::endl;
 		return;
 	} catch(FileRowCountError& e) {
 		switch (this->_lang) {
@@ -71,7 +74,7 @@ void Config::checkConfigFile(std::string fileName){
 				std::cerr << "Wrong number of lines in file: ";
 				break;
 		}
-		std::cout << fileName << std::endl;
+		std::cout << this->_currentPath << std::endl;
 		return;
 	}
 
@@ -150,15 +153,18 @@ std::vector<std::string> Config::getText(std::string fileName) {
 	return s;
 };
 
-
+/*---------------Getters and Setters---------------*/
+// Установка текущего языка
 void Config::setLanguage(Languages lang) {
 	this->_lang = lang;
 };
 
+// Установка текущего пути файла конфигурации
 void Config::setCurrentPath(std::string path) {
 	this->_currentPath = path; 
 };
 
+// Получение текущего пути файла конфигурации
 std::string Config::getCurrentPath() {
 	return this->_currentPath;
 }

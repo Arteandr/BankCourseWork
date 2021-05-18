@@ -18,7 +18,6 @@ int getch(void) {
 };
 
 Menu::Menu(Config& cfg) : _cfg(cfg) {
-	this->chooseLang(); // Вызываем меню выбора языка
 };
 
 // Очистка консоли
