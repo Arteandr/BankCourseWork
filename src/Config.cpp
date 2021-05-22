@@ -145,7 +145,7 @@ std::vector<std::string> Config::getText(std::string fileName) {
 				std::cerr << "Неверное количество строк в файле: ";
 				break;
 			case EN:
-				std::cerr << "Wrong number of lines in file: ";
+				std::cerr << "Wrongо number of lines in file: ";
 				break;
 		}
 		std::cout << fileName << std::endl;
@@ -156,7 +156,41 @@ std::vector<std::string> Config::getText(std::string fileName) {
 /*---------------Getters and Setters---------------*/
 // Установка текущего языка
 void Config::setLanguage(Languages lang) {
-	this->_lang = lang;
+	std::string buffer;
+	std::fstream FILE;
+
+	try {
+		this->_lang = lang;
+		FILE.open(this->_currentPath, std::ios_base::in | std::ios_base::out);
+
+		if(!FILE.is_open())
+			throw FileOpenError();
+
+		while(!FILE.eof()) {
+			getline(FILE, buffer);
+			if(buffer.length() < 1 || buffer[0] == '#')
+				continue;
+			else {
+				std::size_t pos = buffer.find("LANG");
+				if(pos == std::string::npos)
+					continue;
+
+				std::string l;
+				if(lang == RU)
+					l = "RU";
+				else if(lang == EN)
+					l = "EN";
+			
+				FILE.seekp(pos);
+				
+				buffer = "LANG=" + l + '\n';
+				FILE << buffer;
+			}
+		};
+
+	} catch(std::exception& e) { std::cout << "Error"; };
+
+	FILE.close();
 };
 
 // Установка текущего пути файла конфигурации

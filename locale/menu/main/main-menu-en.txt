@@ -1,5 +1,10 @@
-Open ATM
+Show system state
+Create object
+Delete object
+Actions
+Change output files
 Change language
-About
+About the author
+Operator's manual
+Info
 Exit
-

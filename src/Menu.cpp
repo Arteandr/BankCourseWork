@@ -17,7 +17,9 @@ int getch(void) {
 	return ch;
 };
 
+
 Menu::Menu(Config& cfg) : _cfg(cfg) {
+	this->prevMenu = nullptr;
 };
 
 // Очистка консоли
@@ -25,6 +27,37 @@ void Menu::clear() {
 	std::system("clear");
 };
 
+void Menu::footer() {
+	std::cout << std::endl;
+
+	std::vector<std::string> info = this->_cfg.getText("FOOTER");
+
+	for(int i = 0; i < info.size(); i++) {
+		std::cout << info[i] << std::endl;
+	};
+
+	int key;
+	bool err = false;
+
+	do {
+		err = false;
+		key = getch();
+		if(key < 49 || key > 51)
+			err = true;
+	} while(err);
+
+	switch (key) {
+		case 49:
+			this->mainScreen();
+			break;
+		case 50:			
+			this->chooseLang();
+			break;
+		case 51:
+			exit(0);
+			break;
+	};
+}
 
 /*-------------Начальный экран-------------*/
 void Menu::chooseLang() {
@@ -34,27 +67,33 @@ void Menu::chooseLang() {
 	std::cout << "\t\t\t\t" << "\t|" << std::endl;
 	std::cout << "1. Русский\t\t\t" << "\t|" << "\t1. Russian" << std::endl;
 	std::cout << "2. Английский\t\t\t" << "\t|" << "\t2. English" << std::endl;
+
 	bool err;
 	int key;
 
 	do { 
 		err = false;
 		key = getch();
-		if(key == 49 || key == 50) {
-			switch (key) {
-				case 49:
-					this->_cfg.setLanguage(RU);
-					break;
-				case 50:
-					this->_cfg.setLanguage(EN);
-					break;
-			}
-		} else err = true;
+		if(key != 49 && key != 50)
+			err = true;
 	
 	} while(err);
+
+	switch (key) {
+		case 49:
+			this->_cfg.setLanguage(RU);
+			break;
+		case 50:
+			this->_cfg.setLanguage(EN);
+			break;
+	}
+	
+	this->prevMenu();
 };
 
 void Menu::startScreen() {
+	this->prevMenu = [this]() { this->startScreen(); };
+
 	Menu::clear();
 
 	std::vector<std::string> info = this->_cfg.getText("START_SCREEN");
@@ -89,21 +128,66 @@ void Menu::startScreen() {
 
 /*-------------Главный экран-------------*/
 void Menu::mainScreen() {
+	this->prevMenu = [this]() { this->mainScreen(); };
+
 	Menu::clear();
 
 	std::vector<std::string> info = this->_cfg.getText("MAIN_SCREEN");
 
 	for(int i = 0; i < info.size() - 1; i++) {
-		std::cout << i + 1 << ". " << info[i] << std::endl;
+		std::cout << i << ". " << info[i] << std::endl;
 	}
 
-	std::cout << info.size() << ". " << info[info.size() - 1] << std::endl;
+	std::cout << info.size() - 1 << ". " << info[info.size() - 1] << std::endl;
+	bool err = false;
+	int key;
+	do {
+		err = false;
+		// 48 - 0 | 57 - 9
+		key = getch();
 
-	int key = getch();
+		if(key < 48 || key > 57) {
+			err = true;
+		}
+	} while(err);
 
 	switch (key) {
-		
+		case 48:
+			break;
+		case 49:
+			break;
+		case 50:
+			break;
+		case 51:
+			break;
 		case 52:
-			std::exit(0);
+			break;
+		case 53:
+			this->chooseLang();
+			break;
+		case 54:
+			this->authorScreen();
+			break;
+		case 55:
+			break;
+		case 56:
+			break;
+		case 57:
+			exit(0);
+			break;
 	}
-}
+};
+
+void Menu::authorScreen() {
+	this->prevMenu = [this] () { this->authorScreen(); };
+	Menu::clear();
+
+	std::vector<std::string> info = this->_cfg.getText("AUTHOR");
+
+	for(int i = 0; i < info.size(); i++) {
+		std::cout << info[i] << std::endl;
+	};
+
+	this->footer();
+
+};
