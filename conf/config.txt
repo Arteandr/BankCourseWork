@@ -3,13 +3,21 @@ LANG=RU
 # Utils
 FOOTER_RU=../locale/footer/footer-ru.txt
 FOOTER_EN=../locale/footer/footer-en.txt
-HELP_RU=../locale/help/help-ru.txt
-HELP_EN=../locale/help/help-en.txt
 AUTHOR_RU=../locale/author/author-ru.txt
 AUTHOR_EN=../locale/author/author-en.txt
+
 # Фреймы
 START_SCREEN_RU=../locale/menu/start/start-menu-ru.txt
 START_SCREEN_EN=../locale/menu/start/start-menu-en.txt
 
 MAIN_SCREEN_RU=../locale/menu/main/main-menu-ru.txt
 MAIN_SCREEN_EN=../locale/menu/main/main-menu-en.txt
+
+STATE_OBJ_SCREEN_RU=../locale/menu/objects/state-menu-ru.txt
+STATE_OBJ_SCREEN_EN=../locale/menu/objects/state-menu-en.txt
+
+ADD_OBJ_SCREEN_RU=../locale/menu/objects/add-menu-ru.txt
+ADD_OBJ_SCREEN_EN=../locale/menu/objects/add-menu-en.txt
+
+DELETE_OBJ_SCREEN_RU=../locale/menu/objects/delete-menu-ru.txt
+DELETE_OBJ_SCREEN_EN=../locale/menu/objects/delete-menu-en.txt
