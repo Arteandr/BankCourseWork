@@ -20,11 +20,16 @@ class Menu {
 	private:
 		static void clear();   // Очистка консоли
 	private:
-		void footer();
+		void footer();         // Футер фреймов
 	public:
 		Menu(Config& cfg);     // Конструктор
 		void chooseLang();     // Меню выбора языка
 		void startScreen();    // Меню стартового экрана
 		void mainScreen();     // Меню главного экрана
 		void authorScreen();   // Меню об авторе
+
+		/* Меню работы с объектами */
+		void stateObjScreen(); // Меню состояния объектов
+		void addObjScreen();   // Меню добавления объектов
+		void delObjScreen();   // Меню удаления объектов
 };
