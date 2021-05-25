@@ -5,9 +5,10 @@
 #include "Menu.h"
 
 Config conf = Config(); // Создаем объект конфигурации
+Menu menu = Menu(); // Создаем объект меню
+
 
 int main(){
-	Menu menu = Menu(); // Создаем объект меню
 	
 	conf.setCurrentPath("../conf/config.txt"); // Устанавливаем дефолтный путь к конфигурационному файлу
 	conf.checkConfigFile(); // Открываем и проверяем конфигурационный файл

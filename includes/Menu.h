@@ -16,8 +16,6 @@ class Menu {
 	public:
 		std::function<void()> prevMenu;
 	private:
-		//Config& _cfg;          // Ссылка на конфигурацию
-	private:
 		static void clear();   // Очистка консоли
 	private:
 		void footer();         // Футер фреймов
