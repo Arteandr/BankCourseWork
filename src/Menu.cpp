@@ -1,5 +1,7 @@
 #include "Menu.h"
 
+extern Config conf;
+
 std::ostream& center(int v, std::string x) {
 	std::cout << std::setw(v + x.length() / 2);
 	return std::cout;
@@ -18,7 +20,7 @@ int getch(void) {
 };
 
 
-Menu::Menu(Config& cfg) : _cfg(cfg) {
+Menu::Menu() {
 	this->prevMenu = nullptr;
 };
 
@@ -30,7 +32,7 @@ void Menu::clear() {
 void Menu::footer() {
 	std::cout << std::endl;
 
-	std::vector<std::string> info = this->_cfg.getText("FOOTER");
+	std::vector<std::string> info = conf.getText("FOOTER");
 
 	for(int i = 0; i < info.size(); i++) {
 		std::cout << info[i] << std::endl;
@@ -81,10 +83,10 @@ void Menu::chooseLang() {
 
 	switch (key) {
 		case 49:
-			this->_cfg.setLanguage(RU);
+			conf.setLanguage(RU);
 			break;
 		case 50:
-			this->_cfg.setLanguage(EN);
+			conf.setLanguage(EN);
 			break;
 	}
 	
@@ -96,7 +98,7 @@ void Menu::startScreen() {
 
 	Menu::clear();
 
-	std::vector<std::string> info = this->_cfg.getText("START_SCREEN");
+	std::vector<std::string> info = conf.getText("START_SCREEN");
 
 	center(49, info[0]) << info[0] << std::endl;
 	center(51, info[1]) << info[1] << std::endl;
@@ -132,7 +134,7 @@ void Menu::mainScreen() {
 
 	Menu::clear();
 
-	std::vector<std::string> info = this->_cfg.getText("MAIN_SCREEN");
+	std::vector<std::string> info = conf.getText("MAIN_SCREEN");
 
 	for(int i = 0; i < info.size() - 1; i++) {
 		std::cout << i << ". " << info[i] << std::endl;
@@ -182,7 +184,7 @@ void Menu::authorScreen() {
 	this->prevMenu = [this] () { this->authorScreen(); };
 	Menu::clear();
 
-	std::vector<std::string> info = this->_cfg.getText("AUTHOR");
+	std::vector<std::string> info = conf.getText("AUTHOR");
 
 	for(int i = 0; i < info.size(); i++) {
 		std::cout << info[i] << std::endl;

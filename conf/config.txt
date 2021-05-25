@@ -1,4 +1,4 @@
-LANG=RU
+LANG=EN
 
 # Utils
 FOOTER_RU=../locale/footer/footer-ru.txt

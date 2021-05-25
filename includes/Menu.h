@@ -16,13 +16,13 @@ class Menu {
 	public:
 		std::function<void()> prevMenu;
 	private:
-		Config& _cfg;          // Ссылка на конфигурацию
+		//Config& _cfg;          // Ссылка на конфигурацию
 	private:
 		static void clear();   // Очистка консоли
 	private:
 		void footer();         // Футер фреймов
 	public:
-		Menu(Config& cfg);     // Конструктор
+		Menu();     // Конструктор
 		void chooseLang();     // Меню выбора языка
 		void startScreen();    // Меню стартового экрана
 		void mainScreen();     // Меню главного экрана
