@@ -157,6 +157,7 @@ void Menu::mainScreen() {
 		case 48:
 			break;
 		case 49:
+			this->addObjScreen();
 			break;
 		case 50:
 			break;
@@ -192,4 +193,17 @@ void Menu::authorScreen() {
 
 	this->footer();
 
+};
+
+void Menu::addObjScreen() {
+	this->prevMenu = [this] () { this->addObjScreen(); };
+	
+	Menu::clear();
+
+	std::vector<std::string> info = conf.getText("ADD_OBJ_SCREEN");
+	for(short i = 0; i < info.size(); i++) {
+		std::cout << i + 1 << ". " << info[i] << std::endl;
+	};
+
+	this->footer();
 };

@@ -21,3 +21,6 @@ ADD_OBJ_SCREEN_EN=../locale/menu/objects/add-menu-en.txt
 
 DELETE_OBJ_SCREEN_RU=../locale/menu/objects/delete-menu-ru.txt
 DELETE_OBJ_SCREEN_EN=../locale/menu/objects/delete-menu-en.txt
+
+ACTIONS_OBJ_SCREEN_RU=../locale/menu/objects/actions-menu-ru.txt
+ACTIONS_OBJ_SCREEN_EN=../locale/menu/objects/actions-menu-en.txt

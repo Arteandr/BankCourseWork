@@ -30,4 +30,5 @@ class Menu {
 		void stateObjScreen(); // Меню состояния объектов
 		void addObjScreen();   // Меню добавления объектов
 		void delObjScreen();   // Меню удаления объектов
+		void actObjScreen();   // Меню с действиями над объектами 
 };
