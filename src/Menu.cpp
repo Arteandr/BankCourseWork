@@ -44,18 +44,18 @@ void Menu::footer() {
 	do {
 		err = false;
 		key = getch();
-		if(key < 49 || key > 51)
+		if(key != 127 && key != 9 && key != 27)
 			err = true;
 	} while(err);
 
 	switch (key) {
-		case 49:
+		case 127:
 			this->mainScreen();
 			break;
-		case 50:			
+		case 9:			
 			this->chooseLang();
 			break;
-		case 51:
+		case 27:
 			exit(0);
 			break;
 	};
