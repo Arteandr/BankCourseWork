@@ -9,7 +9,6 @@ Menu menu = Menu(); // Создаем объект меню
 
 
 int main(){
-	
 	conf.setCurrentPath("../conf/config.txt"); // Устанавливаем дефолтный путь к конфигурационному файлу
 	conf.checkConfigFile(); // Открываем и проверяем конфигурационный файл
 

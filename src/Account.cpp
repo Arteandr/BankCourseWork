@@ -17,3 +17,26 @@ void Account::operator!() {
 	};
 	!(this->teil->money);
 };
+
+
+
+// Geters && Setters
+void Account::setUsername(std::string name) {
+	this->username = name;
+};
+
+void Account::setIdentCode(long code) {
+	this->identCode = code;
+};
+
+const std::string Account::getUsername() {
+	return this->username;
+};
+
+long Account::getIdentCode() {
+	return this->identCode;
+};
+
+unsigned short Account::getCount() {
+	return Account::count;
+};
