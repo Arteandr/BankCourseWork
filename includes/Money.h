@@ -6,7 +6,6 @@ class Money {
 	private:
 		std::string currency; 					// Название валюты
 		long summMoney; 						// Текущий счет
-		static unsigned short count; 			// Количество экземпляров класса
 	public:
 		Money(std::string c = "$", long s = 0);
 
@@ -20,10 +19,10 @@ class Money {
 		Money& operator -=(long summ); 			// Отнять сумму от текущей
 		Money& operator !();                    // Метод обнуления счёта
 		Money& operator =(std::string name); 	// Установка названия валюты
-		Money& operator =(char c); 				// Установка названия валюты одним символом
 
 
 		static unsigned short getCount(); 		// Метод получения количества экземпляров класса
 
 		~Money();
+		static unsigned short count; 			// Количество экземпляров класса
 };
