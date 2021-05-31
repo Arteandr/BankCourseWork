@@ -201,8 +201,9 @@ void Menu::addAccountScreen() {
 	std::vector<std::string> info = conf.getText("ADD_ACCOUNTS_SCREEN");
 	std::vector<std::string> footer = conf.getText("FOOTER");
 
-	for(short i = 0; i < info.size(); i++) {
-		std::cout << i + 1 << ". " << info[i] << std::endl;
+	std::cout << info[0] << std::endl;
+	for(short i = 1; i < info.size(); i++) {
+		std::cout << i << ". " << info[i] << std::endl;
 	};
 	std::cout << std::endl;
 	for(short i = 0; i < footer.size(); i++) {
