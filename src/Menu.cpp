@@ -195,15 +195,92 @@ void Menu::authorScreen() {
 
 };
 
+void Menu::addAccountScreen() {
+	Menu::clear();
+
+	std::vector<std::string> info = conf.getText("ADD_ACCOUNTS_SCREEN");
+	std::vector<std::string> footer = conf.getText("FOOTER");
+
+	for(short i = 0; i < info.size(); i++) {
+		std::cout << i + 1 << ". " << info[i] << std::endl;
+	};
+	std::cout << std::endl;
+	for(short i = 0; i < footer.size(); i++) {
+		std::cout << footer[i] << std::endl;
+	};
+
+	int key;
+	bool err;
+
+	do {
+		err = false;
+		key = getch();
+
+		if(key != 49 && key != 50 && key != 127 && key != 9 && key != 27)
+			err = true;
+	}while(err);
+
+	switch (key) {
+		case 49:
+			break;
+		case 50:
+			break;
+		case 51:
+			break;
+		case 127:
+			this->prevMenu();
+			break;
+		case 9:			
+			this->chooseLang();
+			break;
+		case 27:
+			exit(0);
+			break;
+	};
+
+};
+
 void Menu::addObjScreen() {
 	this->prevMenu = [this] () { this->addObjScreen(); };
 	
 	Menu::clear();
 
 	std::vector<std::string> info = conf.getText("ADD_OBJ_SCREEN");
+	std::vector<std::string> footer = conf.getText("FOOTER");
+
 	for(short i = 0; i < info.size(); i++) {
 		std::cout << i + 1 << ". " << info[i] << std::endl;
 	};
+	std::cout << std::endl;
+	for(short i = 0; i < footer.size(); i++) {
+		std::cout << footer[i] << std::endl;
+	};
 
-	this->footer();
+	int key;
+	bool err;
+
+	do {
+		err = false;
+		key = getch();
+
+		if(key != 49 && key != 50 && key != 127 && key != 9 && key != 27)
+			err = true;
+	}while(err);
+
+	switch (key) {
+		case 49:
+			this->addAccountScreen();
+			break;
+		case 50:
+			break;
+		case 127:
+			this->mainScreen();
+			break;
+		case 9:			
+			this->chooseLang();
+			break;
+		case 27:
+			exit(0);
+			break;
+	};
 };

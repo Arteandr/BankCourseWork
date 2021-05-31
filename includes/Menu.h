@@ -29,6 +29,8 @@ class Menu {
 		/* Меню работы с объектами */
 		void stateObjScreen(); // Меню состояния объектов
 		void addObjScreen();   // Меню добавления объектов
+		void addAccountScreen(); // Меню добавления аккаунтов
+		void addBillScreen();    // Меню добавления счета
 		void delObjScreen();   // Меню удаления объектов
 		void actObjScreen();   // Меню с действиями над объектами 
 };
