@@ -18,8 +18,6 @@ void Account::operator!() {
 	};
 };
 
-
-
 // Geters && Setters
 void Account::setUsername(std::string name) {
 	this->username = name;

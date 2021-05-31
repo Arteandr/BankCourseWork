@@ -1,5 +1,6 @@
 #include "CommonAccount.h"
 
+unsigned short CommonAccount::count = 0;
 unsigned short CommonAccount::billCount = 1;
 unsigned short CommonAccount::transferPercent = 25;
 
