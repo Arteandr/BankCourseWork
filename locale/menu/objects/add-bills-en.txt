@@ -1,2 +1,3 @@
 Choose an account for adding a bill:
+Enter ident code:
 No account is found in the system

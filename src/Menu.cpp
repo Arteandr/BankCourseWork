@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <limits>
 
 extern Config conf;
 
@@ -241,6 +242,37 @@ void Menu::addAccountScreen() {
 
 };
 
+void Menu::addBillScreen() {
+	Menu::clear();
+
+	std::vector<std::string> info = conf.getText("ADD_BILLS_SCREEN");
+
+	std::cout << info[0] << std::endl;
+	// TODO: Добавить проверку на аккаунты
+	if(true) {
+		Menu::clear();
+		std::cout << info[2] << std::endl;
+	    this->footer();
+	}
+	else {
+		long code;
+		bool err;
+
+		do {
+			err = false;
+			std::cout << info[1];
+			std::cin >> code;
+
+			if(!std::cin || code < 0) {
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				err = true;
+			}
+		}while(err);
+	};
+};
+
+
 void Menu::addObjScreen() {
 	this->prevMenu = [this] () { this->addObjScreen(); };
 	
@@ -273,6 +305,7 @@ void Menu::addObjScreen() {
 			this->addAccountScreen();
 			break;
 		case 50:
+			this->addBillScreen();
 			break;
 		case 127:
 			this->mainScreen();
