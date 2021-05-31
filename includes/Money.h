@@ -9,7 +9,7 @@ class Money {
 	public:
 		Money(std::string c = "$", long s = 0);
 
-		long getMoney() const;
+		long getMoney() const;                  // Метод получения суммы счета
 		const std::string getName() const;      // Метод получения названия валюты
 
 		void setName(std::string name);         // Метод установки названия валюты
@@ -19,7 +19,6 @@ class Money {
 		Money& operator -=(long summ); 			// Отнять сумму от текущей
 		Money& operator !();                    // Метод обнуления счёта
 		Money& operator =(std::string name); 	// Установка названия валюты
-
 
 		static unsigned short getCount(); 		// Метод получения количества экземпляров класса
 

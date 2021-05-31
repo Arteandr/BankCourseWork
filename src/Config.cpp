@@ -153,6 +153,7 @@ std::vector<std::string> Config::getText(std::string fileName) {
 	return s;
 };
 
+
 /*---------------Getters and Setters---------------*/
 // Установка текущего языка
 void Config::setLanguage(Languages lang) {

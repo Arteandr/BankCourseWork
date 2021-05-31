@@ -4,6 +4,8 @@ unsigned short Money::count = 0;
 
 
 // Constructor + Destructor
+Money::Money(std::string c, long s):summMoney(s), currency(c){ };
+
 Money::~Money() {
 	--Money::count;
 };

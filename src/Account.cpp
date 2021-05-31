@@ -2,20 +2,20 @@
 
 unsigned short Account::count = 0;
 
+// Constructor + destructor
 Account::Account(std::string name, long ident, Money money)
-:username(name), identCode(ident), head(nullptr), teil(nullptr)
+:username(name), identCode(ident)
 {
-	//	this->buildCashMoney(money);
+	this->bills.push_back(money);
 	++count;
 };
 
+// Overloads 
 void Account::operator!() {
-	this->teil = this->head;
-	while(this->teil->next) {
-		!(this->teil->money);
-		this->teil = teil->next;
+	std::list<Money>::iterator it;
+	for(it = this->bills.begin(); it != this->bills.end(); ++it) {
+		!(*it); // Оператор ! перегружен как обнуление счета
 	};
-	!(this->teil->money);
 };
 
 
@@ -39,4 +39,8 @@ long Account::getIdentCode() {
 
 unsigned short Account::getCount() {
 	return Account::count;
+};
+
+unsigned short Account::getBillCount() {
+	return this->bills.size();
 };
