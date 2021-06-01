@@ -1,4 +1,4 @@
-LANG=EN
+LANG=RU
 
 # Utils
 FOOTER_RU=../locale/footer/footer-ru.txt
@@ -6,6 +6,9 @@ FOOTER_EN=../locale/footer/footer-en.txt
 
 AUTHOR_RU=../locale/author/author-ru.txt
 AUTHOR_EN=../locale/author/author-en.txt
+
+MANUAL_RU=../locale/manual/manual-ru.txt
+MANUAL_EN=../locale/manual/manual-en.txt
 
 # Фреймы
 START_SCREEN_RU=../locale/menu/start/start-menu-ru.txt

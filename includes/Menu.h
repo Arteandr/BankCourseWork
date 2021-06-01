@@ -25,6 +25,7 @@ class Menu {
 		void startScreen();    // Меню стартового экрана
 		void mainScreen();     // Меню главного экрана
 		void authorScreen();   // Меню об авторе
+		void manualScreen();   // Меню руководства программы
 
 		/* Меню работы с объектами */
 		void stateObjScreen(); // Меню состояния объектов

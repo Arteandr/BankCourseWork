@@ -1,5 +1,4 @@
 #include "Menu.h"
-#include <limits>
 
 extern Config conf;
 
@@ -173,6 +172,7 @@ void Menu::mainScreen() {
 			this->authorScreen();
 			break;
 		case 55:
+			this->manualScreen();
 			break;
 		case 56:
 			break;
@@ -194,6 +194,25 @@ void Menu::authorScreen() {
 
 	this->footer();
 
+};
+
+void Menu::manualScreen() {
+	this->prevMenu = [this] () { this->manualScreen(); };
+	Menu::clear();
+
+	std::vector<std::string> info = conf.getText("MANUAL");
+	
+	center(55, info[0]) << info[0] << std::endl << std::endl;
+	for(int i = 1; i < info.size(); i++) {
+		if(i == 1 || i == 3 || i == 6 || i == 9) {
+			std::cout << '\t' << info[i] << ":" << std::endl;
+			continue;
+		};
+
+		std::cout << info[i] << std::endl;
+	};
+
+	this->footer();
 };
 
 void Menu::addAccountScreen() {
