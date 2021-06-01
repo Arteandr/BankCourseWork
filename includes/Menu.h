@@ -22,10 +22,13 @@ class Menu {
 	public:
 		Menu();     // Конструктор
 		void chooseLang();     // Меню выбора языка
+		void changeConfig();   // Меню изменения путей в конфигурационном файле
 		void startScreen();    // Меню стартового экрана
 		void mainScreen();     // Меню главного экрана
 		void authorScreen();   // Меню об авторе
 		void manualScreen();   // Меню руководства программы
+		void infoScreen();     // Меню информации об программе 
+		
 
 		/* Меню работы с объектами */
 		void stateObjScreen(); // Меню состояния объектов

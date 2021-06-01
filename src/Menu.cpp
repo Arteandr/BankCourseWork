@@ -155,15 +155,19 @@ void Menu::mainScreen() {
 
 	switch (key) {
 		case 48:
+			this->stateObjScreen();
 			break;
 		case 49:
 			this->addObjScreen();
 			break;
 		case 50:
+			this->delObjScreen();
 			break;
 		case 51:
+			this->actObjScreen();
 			break;
 		case 52:
+			this->changeConfig();
 			break;
 		case 53:
 			this->chooseLang();
@@ -175,6 +179,7 @@ void Menu::mainScreen() {
 			this->manualScreen();
 			break;
 		case 56:
+			this->infoScreen();
 			break;
 		case 57:
 			exit(0);
