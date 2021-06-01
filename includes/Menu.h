@@ -11,7 +11,9 @@
 #include <cstdio>
 #include <functional>
 
-// Класс для работы с фреймами программы
+/******************************* 
+ * Класс для работы с фреймами
+ * *******************************/ 
 class Menu {
 	public:
 		std::function<void()> prevMenu;

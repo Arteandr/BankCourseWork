@@ -127,8 +127,9 @@ void Menu::startScreen() {
 
 	this->mainScreen();
 };
-
-/*-------------Главный экран-------------*/
+/******************************* 
+ * 		Главный экран
+ * *******************************/ 
 void Menu::mainScreen() {
 	this->prevMenu = [this]() { this->mainScreen(); };
 
@@ -153,35 +154,39 @@ void Menu::mainScreen() {
 		}
 	} while(err);
 
+/******************************* 
+ * Комментарий [x]:
+ * 	х - клавиша соответствующая номеру
+ * 	*******************************/ 
 	switch (key) {
-		case 48:
+		case 48: // 0
 			this->stateObjScreen();
 			break;
-		case 49:
+		case 49: // 1
 			this->addObjScreen();
 			break;
-		case 50:
+		case 50: // 2
 			this->delObjScreen();
 			break;
-		case 51:
+		case 51: // 3
 			this->actObjScreen();
 			break;
-		case 52:
+		case 52: // 4
 			this->changeConfig();
 			break;
-		case 53:
+		case 53: // 5
 			this->chooseLang();
 			break;
-		case 54:
+		case 54: // 6
 			this->authorScreen();
 			break;
-		case 55:
+		case 55: // 7
 			this->manualScreen();
 			break;
-		case 56:
+		case 56: // 8
 			this->infoScreen();
 			break;
-		case 57:
+		case 57: // 9
 			exit(0);
 			break;
 	}
