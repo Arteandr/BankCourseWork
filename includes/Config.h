@@ -11,28 +11,27 @@
 #include <map>
 #include <vector>
 
-// Доступные языки в программе
+/******************************* 
+ * Доступные языки в программе 
+ * *******************************/ 
 enum Languages {
 	RU,
 	EN
 };
 
-// Класс для работы с файлами
+/******************************* 
+ * Класс для работы с файлами
+ * *******************************/ 
 class Config {
-	// Статические поля
 	public:
 		static unsigned short count;                                    // Количество экземпляров класса
-
-	// Приватные поля
 	private:
 		Languages _lang;  												// Установленный язык
 		std::string _currentPath;                                       // Текущий путь конфигурационного файла
 		std::map<std::string, std::string> _data;                       // Значения с конфигурационного файла
-
-	// Публичные методы
 	public:
 		Config();                                                       // Конструктор
-		void checkConfigFile(); // Проверка конф. файла
+		void checkConfigFile(); 										// Проверка конф. файла
 		std::vector<std::string> getText(std::string fileName);         // Получение текста из файла указаного в конф.
 		void setLanguage(Languages lang); 								// Установка языка программы
 		void setCurrentPath(std::string path);                          // Установка текущего пути к конфигурационному файлу

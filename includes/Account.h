@@ -12,11 +12,11 @@
  * *******************************/ 
 class Account {
 	protected:
-		std::list<Money> bills;
-		std::string username;
-		long identCode;
+		std::list<Money> bills; 											// Доступные счета на аккаунте
+		std::string username; 												// Имя аккаунта
+		long identCode; 													// Идентификационный код
 	private:
-		static unsigned short count;
+		static unsigned short count; 										// Количество экземпляров класса
 	public:
 		Account(std::string name, long ident, Money money = Money());
 
@@ -33,7 +33,6 @@ class Account {
 		unsigned short getBillCount();
 
 		static unsigned short getCount(); 									// Возвращает количество экземпляров
-		// ТЗ
 		void operator! (); 													// Обнуление всех счетов
 
 		/*

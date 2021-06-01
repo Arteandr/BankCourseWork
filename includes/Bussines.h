@@ -2,16 +2,19 @@
 
 #include <string>
 
+/******************************* 
+ * Класс описывающий бизнес
+ * *******************************/ 
 class Bussines {
 	private:
-		static unsigned short count;
+		static unsigned short count; 			// Количество экземпляров класса 
 	protected:
-		std::string bussinesName;
+		std::string bussinesName; 				// Название бизнеса
 	public:
-		Bussines(std::string name);
+		Bussines(std::string name); 			// Конструктор
 
-		static unsigned short getCount();
-		std::string getBussinesName();
+		static unsigned short getCount(); 		// Получение количества объектов класса
+		std::string getBussinesName(); 			// Получения имени бизнеса 
 
-		~Bussines();
+		~Bussines();  							// Деструктор
 };
