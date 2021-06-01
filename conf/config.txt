@@ -10,6 +10,9 @@ AUTHOR_EN=../locale/author/author-en.txt
 MANUAL_RU=../locale/manual/manual-ru.txt
 MANUAL_EN=../locale/manual/manual-en.txt
 
+# State
+BILLS_STATE=../conf/objects/BILLS_STATE.txt
+
 # Фреймы
 START_SCREEN_RU=../locale/menu/start/start-menu-ru.txt
 START_SCREEN_EN=../locale/menu/start/start-menu-en.txt

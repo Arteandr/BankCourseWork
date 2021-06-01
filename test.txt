@@ -1,0 +1,8 @@
+[PremiumAccount]
+username=username
+code=123213
+bills=1,2
+[PremiumAccount]
+username=adsadasd
+code=2323124214a
+bills=3,4

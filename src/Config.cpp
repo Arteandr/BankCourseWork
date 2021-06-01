@@ -153,6 +153,41 @@ std::vector<std::string> Config::getText(std::string fileName) {
 	return s;
 };
 
+Money Config::getMoney(int code) {
+	std::fstream FILE;
+	std::string buffer;
+	std::string needStr = "[" + std::to_string(code) + "]";
+	std::string bCurr;
+	long bSum;
+
+	try {
+		FILE.open(this->_data["BILLS_STATE"]);
+		if(!FILE.is_open())
+			throw FileOpenError();
+
+ 		while(!FILE.eof()) {
+			getline(FILE, buffer);
+			std::size_t pos = buffer.find(needStr);
+			if(pos == std::string::npos)
+				continue;
+			else {
+				getline(FILE, buffer);
+				pos = buffer.find("=");
+				bCurr = buffer.substr(pos + 1);
+				
+				getline(FILE, buffer);
+				pos = buffer.find("=");
+				bSum = std::stol(buffer.substr(pos + 1));
+
+				break;
+			};
+		};
+	} catch(std::exception) { }
+
+	std::cout << bCurr << " " << bSum;
+	return Money(bCurr, bSum);
+};
+
 
 /*---------------Getters and Setters---------------*/
 // Установка текущего языка

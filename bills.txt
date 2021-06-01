@@ -1,0 +1,6 @@
+[1]
+Currency=Currency
+Summ=123
+[2]
+Currency=asdasd
+Summ=23
