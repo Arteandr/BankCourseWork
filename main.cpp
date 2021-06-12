@@ -1,12 +1,10 @@
-#include <cstdio>
-#include <iostream>
-
 #include "Config.h"
 #include "Menu.h"
+#include "Store.h"
 
 Config conf = Config(); // Создаем объект конфигурации
 Menu menu = Menu(); // Создаем объект меню
-
+Store store = Store(); // Создаем объект для хранения данных
 
 int main(){
 	conf.setCurrentPath("../conf/config.txt"); // Устанавливаем дефолтный путь к конфигурационному файлу

@@ -184,7 +184,6 @@ Money Config::getMoney(int code) {
 		};
 	} catch(std::exception) { }
 
-	std::cout << bCurr << " " << bSum;
 	return Money(bCurr, bSum);
 };
 
