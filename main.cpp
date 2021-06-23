@@ -12,8 +12,6 @@ int main(){
 	conf.checkConfigFile(); // Открываем и проверяем конфигурационный файл
 
 	store.init();
-	std::vector<PremiumAccount> t = store.getAllPremAccounts();
-	std::cout << t.size();
 
 	menu.startScreen();
 

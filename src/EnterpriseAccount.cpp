@@ -8,6 +8,11 @@ EnterpriseAccount::EnterpriseAccount(std::string username, long code, std::strin
 		++count;
 	};
 
+EnterpriseAccount::EnterpriseAccount(std::string username, long code, std::string bName, std::vector<Money> bills)
+	:PremiumAccount(username, code, bills), Bussines(bName) {
+		++count;
+	};
+
 EnterpriseAccount::~EnterpriseAccount() {
 	--count;
 };

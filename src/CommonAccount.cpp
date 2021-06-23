@@ -5,5 +5,7 @@ unsigned short CommonAccount::billCount = 1;
 unsigned short CommonAccount::transferPercent = 25;
 
 CommonAccount::CommonAccount(std::string name, long code)
-	: Account(name, code, Money()) {
-};
+	: Account(name, code) { };
+
+CommonAccount::CommonAccount(std::string name, long code, std::vector<Money> bills)
+	:Account(name, code, bills) { };

@@ -32,7 +32,40 @@ void Store::initPremium() {
 	};
 };
 
+void Store::initCommon() {
+	std::vector<std::vector<std::string>> pAcc = conf.getAccounts("COMMON_STATE");
+	for(int i = 0; i < pAcc.size(); i++){
+		std::vector<Money> bills;
+
+		std::vector<int> billNumbers = conf.split(pAcc[i][1]);
+		for(int i = 0; i < billNumbers.size(); i++)
+			bills.push_back(conf.getMoney(billNumbers[i]));	
+
+		CommonAccount temp = CommonAccount(pAcc[i][2],std::stol(pAcc[i][0]),bills);
+
+		this->CommonAccounts.push_back(temp);
+	};
+	
+};
+
+void Store::initEnterprise() {
+	std::vector<std::vector<std::string>> pAcc = conf.getAccounts("ENTERPRISE_STATE");
+	for(int i = 0; i < pAcc.size(); i++){
+		std::vector<Money> bills;
+
+		std::vector<int> billNumbers = conf.split(pAcc[i][1]);
+		for(int i = 0; i < billNumbers.size(); i++)
+			bills.push_back(conf.getMoney(billNumbers[i]));	
+		
+		EnterpriseAccount temp = EnterpriseAccount(pAcc[i][2],std::stol(pAcc[i][0]),pAcc[i][3]);
+	
+		this->EnterpriseAccounts.push_back(temp);
+	};
+};
+
 void Store::init() {
 	this->initBills();
 	this->initPremium();
+	this->initCommon();
+	this->initEnterprise();
 };
