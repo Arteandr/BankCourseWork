@@ -26,3 +26,9 @@ std::vector<CommonAccount> Store::getAllComAccounts(){
 std::vector<PremiumAccount> Store::getAllPremAccounts(){
 	return this->PremiumAccounts;
 };
+
+void Store::init() {
+	std::vector<Money> allBills = conf.getMoney();
+	for(int i = 0; i < allBills.size(); i++)
+		this->Bills.push_back(allBills[i]);
+};

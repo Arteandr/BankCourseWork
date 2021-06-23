@@ -12,6 +12,9 @@ MANUAL_EN=../locale/manual/manual-en.txt
 
 # State
 BILLS_STATE=../conf/objects/BILLS_STATE.txt
+PREMIUM_STATE=../conf/objects/PREMIUM_STATE.txt
+COMMON_STATE=../conf/objects/COMMON_STATE.txt
+ENTERPRISE_STATE=../conf/objects/ENTERPRISE_STATE.txt
 
 # Фреймы
 START_SCREEN_RU=../locale/menu/start/start-menu-ru.txt

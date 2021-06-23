@@ -1,7 +1,5 @@
 #include "Config.h"
 #include "FileException.h"
-#include <cstdlib>
-#include <string>
 
 // Количество объектов класса
 unsigned short Config::count = 0;
@@ -228,66 +226,8 @@ std::vector<Money> Config::getMoney() {
 	return bBills;
 };
 
-std::vector<int> split(std::string s) {
-	std::vector<int> numbers;
-	std::string delimiter = ",";
+std::vector<std::string Config::getPremiumAccount() {
 
-	std::size_t pos = 0;
-	std::string token;
-	while((pos = s.find(delimiter)) != std::string::npos) {
-		token = s.substr(0, pos);
-		numbers.push_back(std::stoi(token));
-		s.erase(0, pos + delimiter.length());
-	};
-	numbers.push_back(std::stoi(s));
-
-	return numbers;
-};
-
-std::vector<std::vector<std::string>> Config::getPremiumAccount() {
-	std::fstream FILE;
-	std::string buffer;
-	std::vector<std::vector<std::string>> bAcc;
-	std::string bBills;
-	std::string bUsername;
-	std::string bIdent;
-
-	try {
-		FILE.open(this->_data["PREMIUM_STATE"]);
-		if(!FILE.is_open())
-			throw FileOpenError();
-
-		while(!FILE.eof()){
-			getline(FILE, buffer);
-			std::size_t pos = buffer.find("[");
-			if(pos == std::string::npos)
-				continue;
-			else {
-				std::vector<std::string> temp;
-
-				bIdent = buffer.substr(pos + 1);
-				bIdent.erase(bIdent.size() - 1);
-				temp.push_back(bIdent);
-
-				getline(FILE, buffer);
-				pos = buffer.find("=");
-				bBills = buffer.substr(pos + 1);
-				temp.push_back(bBills);
-
-				getline(FILE,buffer);
-				pos = buffer.find("=");
-				bUsername = buffer.substr(pos + 1);
-				temp.push_back(bUsername);
-		
-				bAcc.push_back(temp);
-			};
-		};
-	} catch(std::exception ex) 
-	{
-		std::cout << "Exception: " << ex.what();
-	};
-
-	return bAcc;
 };
 
 

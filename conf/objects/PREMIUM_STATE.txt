@@ -1,0 +1,6 @@
+[1]
+bills=1,2,3
+username=Алеша
+[2]
+bills=4,5
+username=Andrey

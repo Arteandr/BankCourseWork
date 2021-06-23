@@ -38,4 +38,11 @@ class Config {
 		std::string getCurrentPath();                                   // Получение текущего пути конфигурацинного файла
 		Money getMoney(int code);
 		std::vector<Money> getMoney();
+
+		std::vector<std::vector<std::string>> getPremiumAccount();
+
+		std::vector<std::vector<std::string>> getEnterpriseAccount();
+
+		std::vector<std::vector<std::string>> getCommonAccount();
+		
 };
