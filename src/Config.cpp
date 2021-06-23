@@ -187,6 +187,45 @@ Money Config::getMoney(int code) {
 	return Money(bCurr, bSum);
 };
 
+std::vector<Money> Config::getMoney() {
+	std::fstream FILE;
+	std::string buffer;
+	std::vector<Money> bBills;
+	std::string bCurr;
+	long bSum;
+
+	try {
+		FILE.open(this->_data["BILLS_STATE"]);
+		if(!FILE.is_open())
+			throw FileOpenError();
+
+		while(!FILE.eof()){
+			getline(FILE, buffer);
+			std::size_t pos = buffer.find("[");
+			if(pos == std::string::npos)
+				continue;
+			else {
+				getline(FILE, buffer);
+				pos = buffer.find("=");
+				bCurr = buffer.substr(pos + 1);
+				
+				getline(FILE, buffer);
+				pos = buffer.find("=");
+				bSum = std::stol(buffer.substr(pos + 1));
+
+				Money mn = Money(bCurr, bSum);
+
+				bBills.push_back(mn);
+				continue;
+			};
+		};
+	} catch(std::exception ex) {
+		std::cout << "Exception" << ex.what();
+	};
+
+	return bBills;
+};
+
 
 /*---------------Getters and Setters---------------*/
 // Установка текущего языка

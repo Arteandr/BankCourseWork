@@ -37,4 +37,5 @@ class Config {
 		void setCurrentPath(std::string path);                          // Установка текущего пути к конфигурационному файлу
 		std::string getCurrentPath();                                   // Получение текущего пути конфигурацинного файла
 		Money getMoney(int code);
+		std::vector<Money> getMoney();
 };
