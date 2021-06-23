@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Config.h"
+#include "Store.h"
 #include <ostream>
 #include <string>
 #include <iomanip>

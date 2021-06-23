@@ -1,0 +1,15 @@
+Total objects in system: 
+Total premium accounts: 
+Total common accounts: 
+Total enterprise accounts: 
+Total bills: 
+Premium accounts:
+Common accounts:
+Enterprise accounts:
+Username: 
+Ident code: 
+Bills count: 
+Bussines name: 
+Bills: 
+Currency: 
+Summ: 

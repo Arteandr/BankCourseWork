@@ -1,6 +1,7 @@
 #include "Menu.h"
 
 extern Config conf;
+extern Store store;
 
 std::ostream& center(int v, std::string x) {
 	std::cout << std::setw(v + x.length() / 2);
@@ -160,7 +161,7 @@ void Menu::mainScreen() {
  * 	*******************************/ 
 	switch (key) {
 		case 48: // 0
-			//this->stateObjScreen();
+			this->stateObjScreen();
 			break;
 		case 49: // 1
 			this->addObjScreen();
@@ -346,4 +347,69 @@ void Menu::addObjScreen() {
 			exit(0);
 			break;
 	};
+};
+
+void Menu::stateObjScreen() {
+	this->prevMenu = [this]() { this->stateObjScreen(); };
+
+	Menu::clear();
+	
+	std::vector<std::string> info = conf.getText("STATE_OBJ_SCREEN");
+
+	std::string det = "------------------------------";
+
+	std::vector<Money> bills = store.getAllBills();
+	std::vector<PremiumAccount> pAcc = store.getAllPremAccounts();
+	std::vector<CommonAccount> cAcc = store.getAllComAccounts();
+	std::vector<EnterpriseAccount> eAcc = store.getAllEnAccounts();
+
+	std::cout << info[0] << store.getTotalCount() << std::endl;
+	std::cout << info[1] << pAcc.size() << std::endl;
+	std::cout << info[2] << cAcc.size() << std::endl;
+	std::cout << info[3] << eAcc.size() << std::endl;
+	std::cout << info[4] << bills.size() << std::endl << std::endl;
+
+	if(pAcc.size() > 0) {
+		std::cout << info[5] << std::endl;
+		std::cout << det << std::endl;
+		for(int i = 0; i < pAcc.size(); i++){
+			std::cout << info[9] << pAcc[i].getIdentCode() << std::endl;
+			std::cout << info[8] << pAcc[i].getUsername() << std::endl;
+			std::cout << info[10] << pAcc[i].getBillCount() << std::endl << std::endl;
+		};
+	};
+
+	if(cAcc.size() > 0) {
+		std::cout << info[6] << std::endl;
+		std::cout << det << std::endl;
+		for(int i = 0; i < cAcc.size(); i++){
+			std::cout << info[9] << cAcc[i].getIdentCode() << std::endl;
+			std::cout << info[8] << cAcc[i].getUsername() << std::endl;
+			std::cout << info[10] << cAcc[i].getBillCount() << std::endl << std::endl;
+		};
+	};
+
+	if(eAcc.size() > 0) {
+		std::cout << info[7] << std::endl;
+		std::cout << det << std::endl;
+		for(int i = 0; i < eAcc.size(); i++){
+			std::cout << info[9] << eAcc[i].getIdentCode() << std::endl;
+			std::cout << info[8] << eAcc[i].getUsername() << std::endl;
+			std::cout << info[10] << eAcc[i].getBillCount() << std::endl;
+			std::cout << info[11] << eAcc[i].getBussinesName() << std::endl << std::endl;
+		};
+	};
+
+	if(bills.size() > 0){
+		std::cout << info[12] << std::endl;
+		std::cout << det << std::endl;
+		for(int i = 0; i < bills.size(); i++){
+			std::cout << info[13] << bills[i].getName() << std::endl;
+			std::cout << info[14] << bills[i].getMoney() << std::endl << std::endl;
+		};
+	};
+
+
+	std::cout << std::endl;
+	this->footer();
 };

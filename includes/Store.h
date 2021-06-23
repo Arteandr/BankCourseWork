@@ -28,5 +28,7 @@ class Store {
 		std::vector<PremiumAccount> getAllPremAccounts();
 		std::vector<Money> getAllBills();
 
+		int getTotalCount();
+
 		void init();
 };

@@ -9,6 +9,9 @@ std::vector<CommonAccount> Store::getAllComAccounts(){
 std::vector<PremiumAccount> Store::getAllPremAccounts(){
 	return this->PremiumAccounts;
 };
+std::vector<Money> Store::getAllBills(){
+	return this->Bills;
+};
 
 void Store::initBills() {
 	// Инициализирование всех счетов
@@ -68,4 +71,8 @@ void Store::init() {
 	this->initPremium();
 	this->initCommon();
 	this->initEnterprise();
+};
+
+int Store::getTotalCount() {
+	return this->CommonAccounts.size() + this->EnterpriseAccounts.size() + this->PremiumAccounts.size() + this->Bills.size();
 };
