@@ -30,6 +30,8 @@ ADD_OBJ_SCREEN_RU=../locale/menu/objects/add-menu-ru.txt
 ADD_OBJ_SCREEN_EN=../locale/menu/objects/add-menu-en.txt
 ADD_ACCOUNTS_SCREEN_RU=../locale/menu/objects/add-accounts-ru.txt
 ADD_ACCOUNTS_SCREEN_EN=../locale/menu/objects/add-accounts-en.txt
+ADD_ACCOUNTS_MENU_RU=../locale/menu/objects/add-accounts-menu-ru.txt
+ADD_ACCOUNTS_MENU_EN=../locale/menu/objects/add-accounts-menu-en.txt
 ADD_BILLS_SCREEN_RU=../locale/menu/objects/add-bills-ru.txt
 ADD_BILLS_SCREEN_EN=../locale/menu/objects/add-bills-en.txt
 

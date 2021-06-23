@@ -133,7 +133,7 @@ void Menu::startScreen() {
  * *******************************/ 
 void Menu::mainScreen() {
 	this->prevMenu = [this]() { this->mainScreen(); };
-
+	store.init();
 	Menu::clear();
 
 	std::vector<std::string> info = conf.getText("MAIN_SCREEN");
@@ -248,16 +248,19 @@ void Menu::addAccountScreen() {
 		err = false;
 		key = getch();
 
-		if(key != 49 && key != 50 && key != 127 && key != 9 && key != 27)
+		if(key != 49 && key != 50 && key != 51 && key != 127 && key != 9 && key != 27)
 			err = true;
 	}while(err);
 
 	switch (key) {
 		case 49:
+			this->addAccount("common");
 			break;
 		case 50:
+			this->addAccount("premium");
 			break;
 		case 51:
+			this->addEnterpriseAccount();
 			break;
 		case 127:
 			this->prevMenu();
@@ -270,6 +273,72 @@ void Menu::addAccountScreen() {
 			break;
 	};
 
+};
+
+void Menu::addAccount(std::string type) {
+	Menu::clear();
+
+	bool err = false;
+
+	std::string username;
+	long ident;
+
+	std::vector<std::string> info = conf.getText("ADD_ACCOUNTS_MENU");
+
+	std::cout << info[0] << std::endl << std::endl;
+
+	do{
+		err = false;
+		std::cout << info[1];
+		std::cin >> ident;
+		if(std::cin.fail() || ident <= 0) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			err = true;
+		};
+	} while(err);
+
+	std::cout << info[2];
+	std::cin >> username;
+
+	conf.addAccount(type, username, ident);
+
+	this->mainScreen();
+};
+
+void Menu::addEnterpriseAccount() {
+	Menu::clear();
+
+	bool err = false;
+
+	std::string username;
+	long ident;
+	std::string bName;
+
+	std::vector<std::string> info = conf.getText("ADD_ACCOUNTS_MENU");
+
+	std::cout << info[0] << std::endl << std::endl;
+
+	do{
+		err = false;
+		std::cout << info[1];
+		std::cin >> ident;
+		if(std::cin.fail() || ident <= 0) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			err = true;
+		};
+	} while(err);
+
+	std::cout << info[2];
+	std::cin >> username;
+
+	std::cout << info[3];
+	std::cin >> bName; 
+
+	conf.addEnterpriseAccount(username, ident, bName);
+
+	this->mainScreen();
 };
 
 void Menu::addBillScreen() {

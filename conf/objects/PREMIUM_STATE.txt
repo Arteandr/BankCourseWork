@@ -7,3 +7,9 @@ username=Алексей
 [214412]
 bills=1
 username=Алексей
+[214412]
+bills=1
+username=Алексей
+[1337]
+bills=1
+username=Boris

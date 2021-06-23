@@ -322,6 +322,27 @@ void Config::addAccount(std::string type, std::string username, long ident){
 	};
 };
 
+void Config::addEnterpriseAccount(std::string username, long ident, std::string bName) {
+	std::fstream FILE;
+	
+	try {
+		FILE.open(this->_data["ENTERPRISE_STATE"], std::ios::app);
+		if(!FILE.is_open())
+			throw FileOpenError();
+
+		FILE << "[" << ident << "]" << std::endl;
+		FILE << "bills=1" << std::endl;
+		FILE << "username=" << username << std::endl;
+		FILE << "bussinesName=" << bName << std::endl;
+
+		FILE.close();
+	} catch(std::exception ex) {
+		std::cout << "Exception addAccount";
+	};
+
+
+};
+
 /*---------------Getters and Setters---------------*/
 // Установка текущего языка
 void Config::setLanguage(Languages lang) {

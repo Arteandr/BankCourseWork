@@ -22,6 +22,8 @@ class Menu {
 		static void clear();   // Очистка консоли
 	private:
 		void footer();         // Футер фреймов
+		void addAccount(std::string type);
+		void addEnterpriseAccount(); 
 	public:
 		Menu();     // Конструктор
 		void chooseLang();     // Меню выбора языка

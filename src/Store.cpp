@@ -13,6 +13,22 @@ std::vector<Money> Store::getAllBills(){
 	return this->Bills;
 };
 
+void Store::addCommonAccount(CommonAccount acc) {
+	this->CommonAccounts.push_back(acc);
+};
+
+void Store::addPremiumAccount(PremiumAccount acc) {
+	this->PremiumAccounts.push_back(acc);
+};
+
+void Store::addEnterpriseAccount(EnterpriseAccount acc) {
+	this->EnterpriseAccounts.push_back(acc);
+};
+
+void Store::addBill(Money bill) {
+	this->Bills.push_back(bill);
+};
+
 void Store::initBills() {
 	// Инициализирование всех счетов
 	std::vector<Money> allBills = conf.getMoney();
