@@ -10,6 +10,15 @@ Account::Account(std::string name, long ident, Money money)
 	++count;
 };
 
+Account::Account(std::string name, long ident, std::vector<Money> bills){
+	this->username = name;
+	this->identCode = ident;
+	for(int i = 0; i < bills.size(); i++)
+		this->bills.push_back(bills[i]);
+
+	++count;
+};
+
 // Overloads 
 void Account::operator!() {
 	std::list<Money>::iterator it;

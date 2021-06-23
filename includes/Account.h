@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <list>
+#include <vector>
 
 #include "Money.h"
 #include "Config.h"
@@ -19,7 +20,7 @@ class Account {
 		static unsigned short count; 										// Количество экземпляров класса
 	public:
 		Account(std::string name, long ident, Money money = Money());
-
+		Account(std::string name, long ident, std::vector<Money> bills);
 		/*virtual void addMoney(long sum); 									// Положить деньги на счет
 		virtual void withdrawMoney(long sum);								// Снять деньги со счета
 

@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Account.h"
+#include "Money.h"
 #include <string>
+#include <vector>
 
 /******************************* 
  * Премиум аккаунт
@@ -14,6 +16,7 @@ class PremiumAccount: public Account {
 		static unsigned short transferPercent; 				// Процент перевода на другой аккаунт
 	public:
 		PremiumAccount(std::string username, long code);    // Конструктор
+		PremiumAccount(std::string username, long code, std::vector<Money> bills);
 
 		~PremiumAccount(); 									// Деструктор 
 };

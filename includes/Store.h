@@ -15,17 +15,18 @@ class Store {
 		std::vector<CommonAccount> CommonAccounts;
 		std::vector<PremiumAccount> PremiumAccounts;
 	private:
-		void addBill(Money bill);
-		void addEnAccount(EnterpriseAccount acc);
-		void addComAccount(CommonAccount acc);
-		void addPremAccount(PremiumAccount acc);
 
+		void initBills();
+		void initPremium();
+		void initEnterprise();
+		void initCommon();
+
+
+	public:
 		std::vector<EnterpriseAccount> getAllEnAccounts();
 		std::vector<CommonAccount> getAllComAccounts();
 		std::vector<PremiumAccount> getAllPremAccounts();
 		std::vector<Money> getAllBills();
 
-	public:
 		void init();
-
 };

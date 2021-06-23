@@ -228,7 +228,7 @@ std::vector<Money> Config::getMoney() {
 	return bBills;
 };
 
-std::vector<int> split(std::string s) {
+std::vector<int> Config::split(std::string s) {
 	std::vector<int> numbers;
 	std::string delimiter = ",";
 

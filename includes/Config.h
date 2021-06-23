@@ -40,4 +40,6 @@ class Config {
 		std::vector<Money> getMoney();
 
 		std::vector<std::vector<std::string>> getAccounts(std::string type);
+
+		std::vector<int> split(std::string);
 };

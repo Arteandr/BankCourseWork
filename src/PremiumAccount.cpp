@@ -9,6 +9,11 @@ PremiumAccount::PremiumAccount(std::string username, long code)
 		++count;
 	};
 
+PremiumAccount::PremiumAccount(std::string username, long code, std::vector<Money> bills)
+	:Account(username, code, bills) { 
+		++count;
+	};
+
 PremiumAccount::~PremiumAccount() {
 	--count;
 };
