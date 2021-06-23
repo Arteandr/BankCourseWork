@@ -39,10 +39,5 @@ class Config {
 		Money getMoney(int code);
 		std::vector<Money> getMoney();
 
-		std::vector<std::vector<std::string>> getPremiumAccount();
-
-		std::vector<std::vector<std::string>> getEnterpriseAccount();
-
-		std::vector<std::vector<std::string>> getCommonAccount();
-		
+		std::vector<std::vector<std::string>> getAccounts(std::string type);
 };

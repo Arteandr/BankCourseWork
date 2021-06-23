@@ -244,16 +244,17 @@ std::vector<int> split(std::string s) {
 	return numbers;
 };
 
-std::vector<std::vector<std::string>> Config::getPremiumAccount() {
+std::vector<std::vector<std::string>> Config::getAccounts(std::string type) {
 	std::fstream FILE;
 	std::string buffer;
 	std::vector<std::vector<std::string>> bAcc;
 	std::string bBills;
 	std::string bUsername;
 	std::string bIdent;
+	std::string bBussines;
 
 	try {
-		FILE.open(this->_data["PREMIUM_STATE"]);
+		FILE.open(this->_data[type]);
 		if(!FILE.is_open())
 			throw FileOpenError();
 
@@ -278,6 +279,13 @@ std::vector<std::vector<std::string>> Config::getPremiumAccount() {
 				pos = buffer.find("=");
 				bUsername = buffer.substr(pos + 1);
 				temp.push_back(bUsername);
+
+				if(type == "ENTERPRISE_STATE"){
+					getline(FILE, buffer);
+					pos = buffer.find("=");
+					bBussines = buffer.substr(pos + 1);
+					temp.push_back(bBussines);
+				};
 		
 				bAcc.push_back(temp);
 			};

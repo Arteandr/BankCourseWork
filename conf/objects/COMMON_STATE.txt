@@ -1,0 +1,6 @@
+[0]
+bills=2,3,4
+username=Oleg
+[5]
+bills=63,42,2
+username=Vova
