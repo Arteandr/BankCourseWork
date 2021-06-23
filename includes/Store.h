@@ -28,6 +28,8 @@ class Store {
 		std::vector<PremiumAccount> getAllPremAccounts();
 		std::vector<Money> getAllBills();
 
+		bool codeExist(long code);
+
 		void addCommonAccount(CommonAccount acc);
 		void addPremiumAccount(PremiumAccount acc);
 		void addEnterpriseAccount(EnterpriseAccount acc);

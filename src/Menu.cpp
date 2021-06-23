@@ -291,7 +291,7 @@ void Menu::addAccount(std::string type) {
 		err = false;
 		std::cout << info[1];
 		std::cin >> ident;
-		if(std::cin.fail() || ident <= 0) {
+		if(std::cin.fail() || ident <= 0 || store.codeExist(ident)) {
 			std::cin.clear();
 			std::cin.ignore(32767, '\n');
 			err = true;
@@ -323,7 +323,7 @@ void Menu::addEnterpriseAccount() {
 		err = false;
 		std::cout << info[1];
 		std::cin >> ident;
-		if(std::cin.fail() || ident <= 0) {
+		if(std::cin.fail() || ident <= 0 || store.codeExist(ident)) {
 			std::cin.clear();
 			std::cin.ignore(32767, '\n');
 			err = true;

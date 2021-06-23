@@ -36,6 +36,21 @@ void Store::initBills() {
 		this->Bills.push_back(allBills[i]);
 };
 
+bool Store::codeExist(long code) {
+	bool exist = false;
+
+	for(int i = 0; i < this->CommonAccounts.size(); i++)
+		if(CommonAccounts[i].getIdentCode() == code)
+			exist = true;
+	for(int i = 0; i < this->EnterpriseAccounts.size(); i++)
+		if(EnterpriseAccounts[i].getIdentCode() == code)
+			exist = true;
+	for(int i = 0; i < this->PremiumAccounts.size(); i++)
+		if(PremiumAccounts[i].getIdentCode() == code)
+			exist = true;
+
+	return exist;
+};
 
 void Store::initPremium() {
 	std::vector<std::vector<std::string>> pAcc = conf.getAccounts("PREMIUM_STATE");
