@@ -1,9 +1,0 @@
-[0]
-Currency=teast
-Sum=123123
-[1]
-Currency=Dollard
-Sum=1231233
-[3]
-Currency=teastadasdas
-Sum=123123

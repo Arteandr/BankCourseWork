@@ -62,7 +62,7 @@ void Config::checkConfigFile(){
 				std::cerr << "Ошибка при чтении строки из файла: ";
 				break;
 			case EN:
-				std::cerr << "";
+				std::cerr << "String read error";
 				break;
 		}
 		std::cout << this->_currentPath << std::endl;
@@ -298,6 +298,29 @@ std::vector<std::vector<std::string>> Config::getAccounts(std::string type) {
 	return bAcc;
 };
 
+void Config::addAccount(std::string type, std::string username, long ident){
+	std::fstream FILE;
+	
+	try {
+		if(type == "premium"){
+			FILE.open(this->_data["PREMIUM_STATE"], std::ios::app);
+			if(!FILE.is_open())
+				throw FileOpenError();
+		}else if(type == "common") {
+			FILE.open(this->_data["COMMON_STATE"], std::ios::app);
+			if(!FILE.is_open())
+				throw FileOpenError();
+		};
+
+		FILE << "[" << ident << "]" << std::endl;
+		FILE << "bills=1" << std::endl;
+		FILE << "username=" << username << std::endl;
+
+		FILE.close();
+	} catch(std::exception ex) {
+		std::cout << "Exception addAccount";
+	};
+};
 
 /*---------------Getters and Setters---------------*/
 // Установка текущего языка
