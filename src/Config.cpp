@@ -316,7 +316,7 @@ void Config::addBill(long code, std::string currency) {
 	};
 };
 
-void Config::addAccount(std::string type, std::string username, long ident){
+void Config::addAccount(std::string type, std::string username, long ident, std::string curr){
 	std::fstream FILE;
 	
 	try {
@@ -330,6 +330,8 @@ void Config::addAccount(std::string type, std::string username, long ident){
 				throw FileOpenError();
 		};
 
+		this->addBill(ident, curr);
+
 		FILE << "[" << ident << "]" << std::endl;
 		FILE << "bills=1" << std::endl;
 		FILE << "username=" << username << std::endl;
@@ -340,7 +342,7 @@ void Config::addAccount(std::string type, std::string username, long ident){
 	};
 };
 
-void Config::addEnterpriseAccount(std::string username, long ident, std::string bName) {
+void Config::addEnterpriseAccount(std::string username, long ident, std::string bName, std::string curr) {
 	std::fstream FILE;
 	
 	try {
@@ -348,7 +350,7 @@ void Config::addEnterpriseAccount(std::string username, long ident, std::string 
 		if(!FILE.is_open())
 			throw FileOpenError();
 
-		this->addBill(ident, "Рубли");
+		this->addBill(ident, curr);
 
 		FILE << "[" << ident << "]" << std::endl;
 		FILE << "bills=" << ident << std::endl;

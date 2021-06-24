@@ -43,8 +43,8 @@ class Config {
 
 		std::vector<std::vector<std::string>> getAccounts(std::string type); // Получение всех аккаунтов указаного типа из файла
 
-		void addAccount(std::string type, std::string username, long ident);
-		void addEnterpriseAccount(std::string username, long ident, std::string bName);
+		void addAccount(std::string type, std::string username, long ident, std::string curr);
+		void addEnterpriseAccount(std::string username, long ident, std::string bName, std::string curr);
 
 		void addBill(long code,std::string currency);
 };

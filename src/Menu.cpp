@@ -282,6 +282,7 @@ void Menu::addAccount(std::string type) {
 
 	std::string username;
 	long ident;
+	std::string curr;
 
 	std::vector<std::string> info = conf.getText("ADD_ACCOUNTS_MENU");
 
@@ -301,7 +302,10 @@ void Menu::addAccount(std::string type) {
 	std::cout << info[2];
 	std::cin >> username;
 
-	conf.addAccount(type, username, ident);
+	std::cout << info[4];
+	std::cin >> curr;
+
+	conf.addAccount(type, username, ident, curr);
 
 	this->mainScreen();
 };
@@ -314,6 +318,7 @@ void Menu::addEnterpriseAccount() {
 	std::string username;
 	long ident;
 	std::string bName;
+	std::string curr;
 
 	std::vector<std::string> info = conf.getText("ADD_ACCOUNTS_MENU");
 
@@ -336,7 +341,10 @@ void Menu::addEnterpriseAccount() {
 	std::cout << info[3];
 	std::cin >> bName; 
 
-	conf.addEnterpriseAccount(username, ident, bName);
+	std::cout << info[4];
+	std::cin >> curr;
+
+	conf.addEnterpriseAccount(username, ident, bName, curr);
 
 	this->mainScreen();
 };

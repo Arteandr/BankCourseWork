@@ -2,3 +2,4 @@ Account creation
 Enter ident code: 
 Enter username: 
 Enter bussines name: 
+Enter currency name: 
