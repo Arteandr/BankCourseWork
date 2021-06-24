@@ -438,7 +438,7 @@ void Menu::delObjScreen() {
 	std::vector<std::string> footer = conf.getText("FOOTER");
 
 	std::cout << info[0] << std::endl;
-	for(short i = 1; i < info.size(); i++) {
+	for(short i = 1; i <= 3; i++) {
 		std::cout << i << ". " << info[i] << std::endl;
 	};
 	std::cout << std::endl;
@@ -491,17 +491,20 @@ void Menu::delAccount(std::string type) {
 		for(int i = 0; i < acc.size(); i++){
 			std::cout << acc[i].getIdentCode() << " ";
 		};
+		if(acc.size() < 1) this->mainScreen();
 	}else if(type == "premium"){
 		std::vector<PremiumAccount> acc = store.getAllPremAccounts();
 		for(int i = 0; i < acc.size(); i++){
 			std::cout << acc[i].getIdentCode() << " ";
 		};
+		if(acc.size() < 1) this->mainScreen();
 
 	}else if(type == "enterprise") {
 		std::vector<EnterpriseAccount> acc = store.getAllEnAccounts();
 		for(int i = 0; i < acc.size(); i++){
 			std::cout << acc[i].getIdentCode() << " ";
 		};
+		if(acc.size() < 1) this->mainScreen();
 	};
 	
 	std::cout << std::endl;

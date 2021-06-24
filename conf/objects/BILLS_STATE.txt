@@ -1,9 +1,2 @@
-[1]
-currency=Рубль
-sum=0
-[228]
-currency=wfwf
-sum=0
-[227]
-currency=s
-sum=0
+
+

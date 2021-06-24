@@ -1,4 +1,0 @@
-[227]
-bills=1
-username=f
-

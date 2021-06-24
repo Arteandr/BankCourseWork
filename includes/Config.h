@@ -49,4 +49,5 @@ class Config {
 		void addBill(long code,std::string currency);
 
 		void deleteAccount(std::string type, long code);
+		void deleteBill(long code);
 };

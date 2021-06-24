@@ -408,11 +408,42 @@ void Config::deleteAccount(std::string type, long code) {
 		} else if(type == "enterprise"){ 
 			std::remove("../conf/objects/ENTERPRISE_STATE.txt");
 			std::rename("../conf/objects/temp.txt","../conf/objects/ENTERPRISE_STATE.txt");
-
 		};
-
+		this->deleteBill(code);
+		
 	} catch (std::exception) {
 	}
+};
+
+void Config::deleteBill(long code) {
+	std::fstream FILE;
+	std::ofstream temp;
+	std::string buffer;
+	std::string needStr = "[" + std::to_string(code) + "]";
+
+	try {
+		temp.open("../conf/objects/temp.txt");
+		FILE.open(this->_data["BILLS_STATE"]);
+		if(!FILE.is_open())
+			throw FileOpenError();
+
+		while(!FILE.eof()) {
+			getline(FILE, buffer);
+			std::size_t pos = buffer.find(needStr);
+			if(pos == std::string::npos){
+				temp << buffer << std::endl;
+				continue;
+			}else{
+				getline(FILE, buffer);
+				getline(FILE,buffer);
+			};
+		};
+		FILE.close();
+		temp.close();
+
+		std::remove("../conf/objects/BILLS_STATE.txt");
+		std::rename("../conf/objects/temp.txt", "../conf/objects/BILLS_STATE.txt");
+	} catch (std::exception) { };
 };
 
 /*---------------Getters and Setters---------------*/
