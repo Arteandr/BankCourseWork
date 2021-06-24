@@ -1,3 +1,0 @@
-[1]
-bills=1
-username=test

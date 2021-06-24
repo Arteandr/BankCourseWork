@@ -36,6 +36,7 @@ class Store {
 		void addBill(Money bill);
 
 		int getTotalCount();
+		int getAccountsCount();
 
 		void init();
 };

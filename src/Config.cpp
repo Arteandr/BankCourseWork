@@ -298,6 +298,24 @@ std::vector<std::vector<std::string>> Config::getAccounts(std::string type) {
 	return bAcc;
 };
 
+void Config::addBill(long code, std::string currency) {
+	std::fstream FILE;
+	
+	try {
+			FILE.open(this->_data["BILLS_STATE"], std::ios::app);
+			if(!FILE.is_open())
+				throw FileOpenError();
+
+		FILE << "[" << code << "]" << std::endl;
+		FILE << "currency=" << currency << std::endl;
+		FILE << "sum=0" << std::endl;
+
+		FILE.close();
+	} catch(std::exception ex) {
+		std::cout << "Exception addBill";
+	};
+};
+
 void Config::addAccount(std::string type, std::string username, long ident){
 	std::fstream FILE;
 	
@@ -330,8 +348,10 @@ void Config::addEnterpriseAccount(std::string username, long ident, std::string 
 		if(!FILE.is_open())
 			throw FileOpenError();
 
+		this->addBill(ident, "Рубли");
+
 		FILE << "[" << ident << "]" << std::endl;
-		FILE << "bills=1" << std::endl;
+		FILE << "bills=" << ident << std::endl;
 		FILE << "username=" << username << std::endl;
 		FILE << "bussinesName=" << bName << std::endl;
 

@@ -113,3 +113,7 @@ void Store::init() {
 int Store::getTotalCount() {
 	return this->CommonAccounts.size() + this->EnterpriseAccounts.size() + this->PremiumAccounts.size() + this->Bills.size();
 };
+
+int Store::getAccountsCount() {
+	return this->CommonAccounts.size() + this->EnterpriseAccounts.size() + this->PremiumAccounts.size();
+};

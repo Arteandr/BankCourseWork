@@ -348,12 +348,13 @@ void Menu::addBillScreen() {
 
 	std::cout << info[0] << std::endl;
 	// TODO: Добавить проверку на аккаунты
-	if(true) {
+	if(store.getAccountsCount() <= 0) {
 		Menu::clear();
 		std::cout << info[2] << std::endl;
 	    this->footer();
 	}
 	else {
+		std::string currency;
 		long code;
 		bool err;
 
@@ -362,12 +363,15 @@ void Menu::addBillScreen() {
 			std::cout << info[1];
 			std::cin >> code;
 
-			if(!std::cin || code < 0) {
+			if(std::cin.fail() || code < 0 || !store.codeExist(code)) {
 				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cin.ignore(32767, '\n');
 				err = true;
 			}
 		}while(err);
+
+		std::cout << info[3];
+		std::cin >> currency;
 	};
 };
 
@@ -380,7 +384,7 @@ void Menu::addObjScreen() {
 	std::vector<std::string> info = conf.getText("ADD_OBJ_SCREEN");
 	std::vector<std::string> footer = conf.getText("FOOTER");
 
-	for(short i = 0; i < info.size(); i++) {
+	for(short i = 0; i < info.size() - 1; i++) {
 		std::cout << i + 1 << ". " << info[i] << std::endl;
 	};
 	std::cout << std::endl;
