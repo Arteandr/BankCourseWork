@@ -1,2 +1,19 @@
 
 
+
+
+
+
+
+
+
+
+
+[228]
+currency=Rub
+sum=975
+[21]
+currency=rub
+sum=0
+
+

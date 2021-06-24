@@ -445,6 +445,103 @@ void Config::deleteBill(long code) {
 		std::rename("../conf/objects/temp.txt", "../conf/objects/BILLS_STATE.txt");
 	} catch (std::exception) { };
 };
+void Config::addSum(long code, long sum) {
+	std::fstream FILE;
+	std::ofstream temp;
+	std::string buffer;
+	std::string needStr = "[" + std::to_string(code) + "]";
+	try {
+		temp.open("../conf/objects/temp.txt");
+		FILE.open(this->_data["BILLS_STATE"]);
+		if(!FILE.is_open())
+			throw FileOpenError();
+
+		while(!FILE.eof()) {
+			getline(FILE, buffer);
+			std::size_t pos1 = buffer.find(needStr);
+			if(pos1 == std::string::npos){
+				temp << buffer << std::endl;
+				continue;
+			}
+			else {
+				temp << buffer << std::endl;
+				getline(FILE, buffer);
+				temp << buffer << std::endl;
+				getline(FILE, buffer);
+				pos1 = buffer.find("=");
+				long bSum = std::stol(buffer.substr(pos1 + 1));
+				long ostatok = bSum + sum; 
+				temp << "sum=" << ostatok << std::endl;
+				
+				continue;
+			}
+		};
+		FILE.close();
+		temp.close();
+		std::remove("../conf/objects/BILLS_STATE.txt");
+		std::rename("../conf/objects/temp.txt", "../conf/objects/BILLS_STATE.txt");
+	} catch(std::exception) { };
+};
+
+void Config::transferMoney(std::string iType, long iCode, long oCode, long sum) {
+	std::fstream FILE;
+	std::ofstream temp;
+	std::string buffer;
+	std::string needStr = "[" + std::to_string(iCode) + "]";
+	std::string needStr2 = "[" + std::to_string(oCode) + "]";
+	float percent;
+	if(iType == "COMMON_STATE")
+		percent = 0.25;
+	else if(iType == "PREMIUM_STATE")
+		percent = 0;
+	else if(iType == "ENTERPRISE_STATE")
+		percent = 0;
+
+	try {
+		temp.open("../conf/objects/temp.txt");
+		FILE.open(this->_data["BILLS_STATE"]);
+		if(!FILE.is_open())
+			throw FileOpenError();
+
+		while(!FILE.eof()) {
+			getline(FILE, buffer);
+			std::size_t pos1 = buffer.find(needStr);
+			std::size_t pos2 = buffer.find(needStr2);
+			if(pos1 == std::string::npos && pos2 == std::string::npos){
+				temp << buffer << std::endl;
+				continue;
+			}
+			else if(pos1 != std::string::npos && pos2 == std::string::npos){
+				temp << buffer << std::endl;
+				getline(FILE, buffer);
+				temp << buffer << std::endl;
+				getline(FILE, buffer);
+				pos1 = buffer.find("=");
+				long bSum = std::stol(buffer.substr(pos1 + 1));
+				long ostatok = bSum - sum; 
+				if(ostatok < 0) ostatok = 0;
+				temp << "sum=" << ostatok << std::endl;
+				
+				continue;
+			}
+			else if(pos2 != std::string::npos && pos1 == std::string::npos) {
+				temp << buffer << std::endl;
+				getline(FILE, buffer);
+				temp << buffer << std::endl;
+				getline(FILE, buffer);
+				pos2 = buffer.find("=");
+				long bSum = std::stol(buffer.substr(pos2 + 1));
+				temp << "sum=" << bSum + (sum - percent * 100) << std::endl;
+				continue;
+
+			};
+		};
+		FILE.close();
+		temp.close();
+		std::remove("../conf/objects/BILLS_STATE.txt");
+		std::rename("../conf/objects/temp.txt", "../conf/objects/BILLS_STATE.txt");
+	} catch(std::exception) { };
+};
 
 /*---------------Getters and Setters---------------*/
 // Установка текущего языка

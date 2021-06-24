@@ -40,3 +40,9 @@ DELETE_OBJ_SCREEN_EN=../locale/menu/objects/delete-menu-en.txt
 
 ACTIONS_OBJ_SCREEN_RU=../locale/menu/objects/actions-menu-ru.txt
 ACTIONS_OBJ_SCREEN_EN=../locale/menu/objects/actions-menu-en.txt
+
+TRANSFER_MONEY_SCREEN_RU=../locale/menu/objects/transfer-menu-ru.txt
+TRANSFER_MONEY_SCREEN_EN=../locale/menu/objects/transfer-menu-en.txt
+
+ADD_MONEY_SCREEN_RU=../locale/menu/objects/add-money-menu-ru.txt
+ADD_MONEY_SCREEN_EN=../locale/menu/objects/add-money-menu-en.txt

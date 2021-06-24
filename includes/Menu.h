@@ -25,6 +25,8 @@ class Menu {
 		void addAccount(std::string type);
 		void addEnterpriseAccount(); 
 		void delAccount(std::string type);
+		void transfMoney();
+		void addSum();
 	public:
 		Menu();     // Конструктор
 		void chooseLang();     // Меню выбора языка

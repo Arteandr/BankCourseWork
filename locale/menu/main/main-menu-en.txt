@@ -1,8 +1,7 @@
 Show system state
 Create object
 Delete object
-Actions
-Change output files
+Actions object
 Change language
 About the author
 Operator's manual

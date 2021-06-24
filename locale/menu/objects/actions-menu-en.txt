@@ -1,0 +1,3 @@
+Choose action type: 
+Up balance
+Transfer money

@@ -147,10 +147,10 @@ void Menu::mainScreen() {
 	int key;
 	do {
 		err = false;
-		// 48 - 0 | 57 - 9
+		// 48 - 0 | 56 - 8
 		key = getch();
 
-		if(key < 48 || key > 57) {
+		if(key < 48 || key > 56) {
 			err = true;
 		}
 	} while(err);
@@ -170,24 +170,21 @@ void Menu::mainScreen() {
 			this->delObjScreen();
 			break;
 		case 51: // 3
-			//this->actObjScreen();
+			this->actObjScreen();
 			break;
 		case 52: // 4
-			//this->changeConfig();
-			break;
-		case 53: // 5
 			this->chooseLang();
 			break;
-		case 54: // 6
+		case 53: // 5
 			this->authorScreen();
 			break;
-		case 55: // 7
+		case 54: // 6
 			this->manualScreen();
 			break;
-		case 56: // 8
+		case 55: // 7
 			//this->infoScreen();
 			break;
-		case 57: // 9
+		case 56: // 8
 			exit(0);
 			break;
 	}
@@ -429,6 +426,171 @@ void Menu::addObjScreen() {
 	};
 };
 
+void Menu::actObjScreen() {
+	this->prevMenu = [this] () { this->actObjScreen(); };
+
+	Menu::clear();
+
+	std::vector<std::string> info = conf.getText("ACTIONS_OBJ_SCREEN");
+	std::vector<std::string> footer = conf.getText("FOOTER");
+	
+	std::cout << info[0] << std::endl;
+
+	for(int i = 1; i <= 2; i++)
+		std::cout << i << ". " << info[i] << std::endl;
+
+
+	std::cout << std::endl;
+	for(short i = 0; i < footer.size(); i++) {
+		std::cout << footer[i] << std::endl;
+	};
+
+	int key;
+	bool err;
+
+	do {
+		err = false;
+		key = getch();
+
+		if(key != 49 && key != 50 && key != 127 && key != 9 && key != 27)
+			err = true;
+	}while(err);
+
+	switch (key) {
+		case 49:
+			this->addSum();
+			break;
+		case 50:
+			this->transfMoney();
+			break;
+		case 127:
+			this->mainScreen();
+			break;
+		case 9:			
+			this->chooseLang();
+			break;
+		case 27:
+			exit(0);
+			break;
+	};
+
+};
+
+void Menu::addSum() {
+	Menu::clear();
+
+	std::vector<std::string> info = conf.getText("ADD_MONEY_SCREEN");
+	
+	long sum, code;
+	bool err = false;
+
+	do{
+		err = false;
+		std::cout << info[0];
+		std::cin >> code;
+		if(std::cin.fail() || code <= 0 || !store.codeExist(code)) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			err = true;
+		};
+	} while(err);
+	do{
+		err = false;
+		std::cout << info[1];
+		std::cin >> sum;
+		if(std::cin.fail() || sum <= 0) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			err = true;
+		};
+	} while(err);
+
+	conf.addSum(code, sum);
+
+	this->mainScreen();
+};
+
+void Menu::transfMoney() {
+	Menu::clear();
+	std::vector<std::string> info = conf.getText("TRANSFER_MONEY_SCREEN");
+	std::string iType;
+
+	std::cout << info[0] << std::endl;
+
+	for(int i = 1; i <= 3; i++)
+		std::cout << i << ". " << info[i] << std::endl;
+
+	int key;
+	bool err;
+
+	do {
+		err = false;
+		key = getch();
+
+		if(key != 49 && key != 50 && key != 51 && key != 127 && key != 9 && key != 27)
+			err = true;
+	}while(err);
+
+	switch (key) {
+		case 49:
+			iType = "COMMON_STATE";
+			break;
+		case 50:
+			iType = "PREMIUM_STATE";
+			break;
+		case 51:
+			iType = "ENTERPRISE_STATE";
+			break;
+		case 127:
+			this->mainScreen();
+			break;
+		case 9:			
+			this->chooseLang();
+			break;
+		case 27:
+			exit(0);
+			break;
+	};
+
+	long senderIdent;
+	long accepterIdent;
+	long sum;
+	do{
+		err = false;
+		std::cout << info[4];
+		std::cin >> senderIdent;
+		if(std::cin.fail() || senderIdent <= 0 || !store.codeExist(senderIdent)) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			err = true;
+		};
+	} while(err);
+	do{
+		err = false;
+		std::cout << info[5];
+		std::cin >> accepterIdent;
+		if(std::cin.fail() || accepterIdent <= 0 || !store.codeExist(accepterIdent)) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			err = true;
+		};
+	} while(err);
+	do{
+		err = false;
+		std::cout << info[6];
+		std::cin >> sum;
+		if(std::cin.fail() || sum <= 0 ) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			err = true;
+		};
+	} while(err);
+
+	conf.transferMoney(iType, senderIdent, accepterIdent, sum);
+
+	this->mainScreen();
+};
+
 void Menu::delObjScreen() {
 	this->prevMenu = [this] () { this->delObjScreen(); };
 
@@ -468,7 +630,7 @@ void Menu::delObjScreen() {
 			this->delAccount("enterprise");
 			break;
 		case 127:
-			this->prevMenu();
+			this->mainScreen();
 			break;
 		case 9:			
 			this->chooseLang();
@@ -551,7 +713,9 @@ void Menu::stateObjScreen() {
 		for(int i = 0; i < pAcc.size(); i++){
 			std::cout << info[9] << pAcc[i].getIdentCode() << std::endl;
 			std::cout << info[8] << pAcc[i].getUsername() << std::endl;
-			std::cout << info[10] << pAcc[i].getBillCount() << std::endl << std::endl;
+			Money bill = conf.getMoney(pAcc[i].getIdentCode());
+			std::cout << info[13] << bill.getName() << std::endl;
+			std::cout << info[14] << bill.getMoney() << std::endl << std::endl;
 		};
 	};
 
@@ -562,6 +726,9 @@ void Menu::stateObjScreen() {
 			std::cout << info[9] << cAcc[i].getIdentCode() << std::endl;
 			std::cout << info[8] << cAcc[i].getUsername() << std::endl;
 			std::cout << info[10] << cAcc[i].getBillCount() << std::endl << std::endl;
+			Money bill = conf.getMoney(cAcc[i].getIdentCode());
+			std::cout << info[13] << bill.getName() << std::endl;
+			std::cout << info[14] << bill.getMoney() << std::endl << std::endl;
 		};
 	};
 
@@ -573,15 +740,9 @@ void Menu::stateObjScreen() {
 			std::cout << info[8] << eAcc[i].getUsername() << std::endl;
 			std::cout << info[10] << eAcc[i].getBillCount() << std::endl;
 			std::cout << info[11] << eAcc[i].getBussinesName() << std::endl << std::endl;
-		};
-	};
-
-	if(bills.size() > 0){
-		std::cout << info[12] << std::endl;
-		std::cout << det << std::endl;
-		for(int i = 0; i < bills.size(); i++){
-			std::cout << info[13] << bills[i].getName() << std::endl;
-			std::cout << info[14] << bills[i].getMoney() << std::endl << std::endl;
+			Money bill = conf.getMoney(eAcc[i].getIdentCode());
+			std::cout << info[13] << bill.getName() << std::endl;
+			std::cout << info[14] << bill.getMoney() << std::endl << std::endl;
 		};
 	};
 

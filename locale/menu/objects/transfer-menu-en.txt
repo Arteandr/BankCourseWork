@@ -1,0 +1,7 @@
+Choose sender account type:
+Common account 
+Premium account
+Enterprise account
+Enter own code: 
+Enter accepter code: 
+Enter sum: 

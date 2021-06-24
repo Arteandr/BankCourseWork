@@ -21,12 +21,8 @@ class Account {
 	public:
 		Account(std::string name, long ident, Money money = Money());
 		Account(std::string name, long ident, std::vector<Money> bills);
-		/*virtual void addMoney(long sum); 									// Положить деньги на счет
-		virtual void withdrawMoney(long sum);								// Снять деньги со счета
 
-		virtual void deleteCashMoney(); 				                    // Удаление счета
-		*/
-
+		Money getBill();
 		void setUsername(std::string); 										// Установка имени пользователя
 		void setIdentCode(long code); 										// Установка идентиф. кода
 		const std::string getUsername(); 									// Возвращает имя пользователя
@@ -36,9 +32,4 @@ class Account {
 		static unsigned short getCount(); 									// Возвращает количество экземпляров
 		void operator! (); 													// Обнуление всех счетов
 
-		/*
-		friend std::fstream& operator << (std::fstream&,Account&); 			// Сохранение состояния в файл
-		friend std::fstream& operator >> (std::fstream&,Account&);          // Считывание данных с файла
-	
-		virtual ~Account() = 0; */
 };

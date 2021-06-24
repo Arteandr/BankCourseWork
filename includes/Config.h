@@ -50,4 +50,8 @@ class Config {
 
 		void deleteAccount(std::string type, long code);
 		void deleteBill(long code);
+
+		void transferMoney(std::string iType, long iCode, long oCode, long sum);
+
+		void addSum(long code, long sum);
 };
