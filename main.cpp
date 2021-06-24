@@ -13,6 +13,7 @@ int main(){
 
 	store.init();
 
+	conf.deleteAccount("common", 3);
 	menu.startScreen();
 
 	return 0;

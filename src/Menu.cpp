@@ -167,7 +167,7 @@ void Menu::mainScreen() {
 			this->addObjScreen();
 			break;
 		case 50: // 2
-			//this->delObjScreen();
+			this->delObjScreen();
 			break;
 		case 51: // 3
 			//this->actObjScreen();
@@ -383,7 +383,6 @@ void Menu::addBillScreen() {
 	};
 };
 
-
 void Menu::addObjScreen() {
 	this->prevMenu = [this] () { this->addObjScreen(); };
 	
@@ -428,6 +427,99 @@ void Menu::addObjScreen() {
 			exit(0);
 			break;
 	};
+};
+
+void Menu::delObjScreen() {
+	this->prevMenu = [this] () { this->delObjScreen(); };
+
+	Menu::clear();
+
+	std::vector<std::string> info = conf.getText("DELETE_OBJ_SCREEN");
+	std::vector<std::string> footer = conf.getText("FOOTER");
+
+	std::cout << info[0] << std::endl;
+	for(short i = 1; i < info.size(); i++) {
+		std::cout << i << ". " << info[i] << std::endl;
+	};
+	std::cout << std::endl;
+	for(short i = 0; i < footer.size(); i++) {
+		std::cout << footer[i] << std::endl;
+	};
+
+	int key;
+	bool err;
+
+	do {
+		err = false;
+		key = getch();
+
+		if(key != 49 && key != 50 && key != 51 && key != 127 && key != 9 && key != 27)
+			err = true;
+	}while(err);
+
+	switch (key) {
+		case 49:
+			this->delAccount("common");
+			break;
+		case 50:
+			this->delAccount("premium");
+			break;
+		case 51:
+			this->delAccount("enterprise");
+			break;
+		case 127:
+			this->prevMenu();
+			break;
+		case 9:			
+			this->chooseLang();
+			break;
+		case 27:
+			exit(0);
+			break;
+	};
+	
+};
+
+void Menu::delAccount(std::string type) {
+	Menu::clear();
+	std::vector<std::string> info = conf.getText("DELETE_OBJ_SCREEN");
+	bool err = false;
+	long ident;
+	std::cout << info[4] << std::endl;
+	if(type == "common"){
+		std::vector<CommonAccount> acc = store.getAllComAccounts();
+		for(int i = 0; i < acc.size(); i++){
+			std::cout << acc[i].getIdentCode() << " ";
+		};
+	}else if(type == "premium"){
+		std::vector<PremiumAccount> acc = store.getAllPremAccounts();
+		for(int i = 0; i < acc.size(); i++){
+			std::cout << acc[i].getIdentCode() << " ";
+		};
+
+	}else if(type == "enterprise") {
+		std::vector<EnterpriseAccount> acc = store.getAllEnAccounts();
+		for(int i = 0; i < acc.size(); i++){
+			std::cout << acc[i].getIdentCode() << " ";
+		};
+	};
+	
+	std::cout << std::endl;
+
+	do{
+		err = false;
+		std::cout << info[5];
+		std::cin >> ident;
+		if(std::cin.fail() || ident <= 0 || !store.codeExist(ident)) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			err = true;
+		};
+	} while(err);
+
+	conf.deleteAccount(type, ident);
+
+	this->mainScreen();
 };
 
 void Menu::stateObjScreen() {

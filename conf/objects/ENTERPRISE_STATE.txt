@@ -1,4 +1,0 @@
-[221]
-bills=221
-username=test
-bussinesName=test

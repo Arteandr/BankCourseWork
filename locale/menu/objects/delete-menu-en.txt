@@ -1,0 +1,6 @@
+Choose account type which you want to delete: 
+Common account
+Premium account
+Enterprise account
+Availible codes: 
+Enter code: 

@@ -24,6 +24,7 @@ class Menu {
 		void footer();         // Футер фреймов
 		void addAccount(std::string type);
 		void addEnterpriseAccount(); 
+		void delAccount(std::string type);
 	public:
 		Menu();     // Конструктор
 		void chooseLang();     // Меню выбора языка

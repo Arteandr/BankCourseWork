@@ -365,6 +365,56 @@ void Config::addEnterpriseAccount(std::string username, long ident, std::string 
 
 };
 
+void Config::deleteAccount(std::string type, long code) {
+	std::fstream FILE;
+	std::ofstream temp;
+	std::string buffer;
+	std::string needStr = "[" + std::to_string(code) + "]";
+
+	try {
+		temp.open("../conf/objects/temp.txt");
+		if(type == "common")
+			FILE.open(this->_data["COMMON_STATE"]);
+		else if(type == "premium")
+			FILE.open(this->_data["PREMIUM_STATE"]);
+		else if(type == "enterprise")
+			FILE.open(this->_data["ENTERPRISE_STATE"]);
+		if(!FILE.is_open())
+			throw FileOpenError();
+
+		while(!FILE.eof()) {
+			getline(FILE, buffer);
+			std::size_t pos = buffer.find(needStr);
+			if(pos == std::string::npos){
+				temp << buffer << std::endl;
+				continue;
+			}
+			else {
+				getline(FILE, buffer);
+				getline(FILE,buffer);
+				if(type == "enterprise")
+					getline(FILE,buffer);
+			};
+		};
+		FILE.close();
+		temp.close();
+
+		if(type == "common"){
+			std::remove("../conf/objects/COMMON_STATE.txt");
+			std::rename("../conf/objects/temp.txt","../conf/objects/COMMON_STATE.txt");
+		} else if(type == "premium") {
+			std::remove("../conf/objects/PREMIUM_STATE.txt");
+			std::rename("../conf/objects/temp.txt","../conf/objects/PREMIUM_STATE.txt");
+		} else if(type == "enterprise"){ 
+			std::remove("../conf/objects/ENTERPRISE_STATE.txt");
+			std::rename("../conf/objects/temp.txt","../conf/objects/ENTERPRISE_STATE.txt");
+
+		};
+
+	} catch (std::exception) {
+	}
+};
+
 /*---------------Getters and Setters---------------*/
 // Установка текущего языка
 void Config::setLanguage(Languages lang) {

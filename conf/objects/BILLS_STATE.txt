@@ -1,12 +1,9 @@
-[221]
-currency=Рубли
-sum=0
 [1]
-currency=Рубли
+currency=Рубль
 sum=0
-[2]
-currency=Рубли
+[228]
+currency=wfwf
 sum=0
-[6]
-currency=Доллары
+[227]
+currency=s
 sum=0

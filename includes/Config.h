@@ -47,4 +47,6 @@ class Config {
 		void addEnterpriseAccount(std::string username, long ident, std::string bName, std::string curr);
 
 		void addBill(long code,std::string currency);
+
+		void deleteAccount(std::string type, long code);
 };
