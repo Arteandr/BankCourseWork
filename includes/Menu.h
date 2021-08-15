@@ -30,7 +30,6 @@ class Menu {
 	public:
 		Menu();     // Конструктор
 		void chooseLang();     // Меню выбора языка
-		void changeConfig();   // Меню изменения путей в конфигурационном файле
 		void startScreen();    // Меню стартового экрана
 		void mainScreen();     // Меню главного экрана
 		void authorScreen();   // Меню об авторе

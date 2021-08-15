@@ -11,7 +11,6 @@
 class EnterpriseAccount final: public Bussines, public PremiumAccount {
 	private:
 		static unsigned short count; 											// Количество экземпляров класса 
-		static unsigned short billCount; 										// Количество доступных счетов
 	public:
 		EnterpriseAccount(std::string username, long code, std::string bName);  // Конструктор
 		EnterpriseAccount(std::string username, long code, std::string bName, std::vector<Money> bills);
